@@ -9,8 +9,11 @@ import { movieKeys } from '@/domains/movie/queries/keys'
 import { Feather } from '@expo/vector-icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { router, useLocalSearchParams } from 'expo-router'
-import { ScrollView } from 'react-native'
+import { Image } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import ParallaxScroll from '@monterosa/react-native-parallax-scroll'
+import { LinearGradient } from 'expo-linear-gradient'
+import { getFullImageUrl } from '@/util'
 
 export default function MovieDetailsScreeen() {
   const { id } = useLocalSearchParams() as { id: string }
@@ -42,7 +45,7 @@ export default function MovieDetailsScreeen() {
   return !data || isLoading ? (
     <Text>Loading...</Text>
   ) : (
-    <>
+    <Box className="bg-background-dark">
       <Box
         className="absolute left-0 right-0 z-10 flex flex-row items-center justify-between"
         style={{
@@ -59,10 +62,39 @@ export default function MovieDetailsScreeen() {
           <Feather name="more-horizontal" size={24} color="white" />
         </Button>
       </Box>
-      <ScrollView>
-        <MovieHero movie={data} showDetails />
-        <Box className="flex gap-4 p-4 pb-12">
-          <Box className="flex gap-2">
+      <ParallaxScroll
+        renderParallaxBackground={() => <MovieHero movie={data} showDetails />}
+        parallaxHeight={300}
+        parallaxBackgroundScrollSpeed={2.5}
+        showsVerticalScrollIndicator={false}
+      >
+        <Box className="flex gap-4 p-4 pb-12 bg-background-dark">
+          <LinearGradient
+            colors={['#18171900', '#181719']}
+            style={{
+              position: 'absolute',
+              top: -150,
+              left: 0,
+              right: 0,
+              height: 150,
+            }}
+          />
+          <Box className="flex flex-row justify-between items-center absolute -top-10 left-0 right-0 px-4">
+            <Box className="flex gap-2 max-w-[50%]">
+              <Text className="text-3xl font-bold mb-2">{data.title}</Text>
+              <Box className="flex flex-row items-center gap-2">
+                <Text className="opacity-50">{data.year}</Text>
+                <Divider orientation="vertical" />
+                <Text className="opacity-50">{data.runtime} mins</Text>
+              </Box>
+            </Box>
+            <Image
+              source={{ uri: getFullImageUrl(data.poster) }}
+              style={{ width: 125, height: 190 }}
+              className="rounded-lg border"
+            />
+          </Box>
+          <Box className="flex gap-2 mt-40">
             <Text className="text-sm font-bold uppercase">{data.tagline}</Text>
             <Text className="">{data.overview}</Text>
           </Box>
@@ -99,7 +131,7 @@ export default function MovieDetailsScreeen() {
             <Text className="">All data and images are from TMDB</Text>
           </Box>
         </Box>
-      </ScrollView>
-    </>
+      </ParallaxScroll>
+    </Box>
   )
 }

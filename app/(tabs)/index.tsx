@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native'
 export default function Screen() {
   const { data, isLoading } = useGetPopularMovies()
   return (
-    <ScrollView>
+    <ScrollView className="bg-background-dark">
       <Box>
         <PopularMovieCarousel movies={data || []} />
         <Box className="p-4 mt-2">
