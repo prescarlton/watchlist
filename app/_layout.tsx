@@ -7,9 +7,14 @@ import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
+import migrations from '@/db/migrations/migrations'
 
 import '../global.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { View } from 'react-native'
+import { Text } from '@/components/ui/text'
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
+import { db } from '@/db'
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,6 +60,22 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
+  const { success, error } = useMigrations(db, migrations)
+  if (error) {
+    return (
+      <View className="flex-1 mt-32">
+        <Text>Migration error: {error.message}</Text>
+        <Text>{JSON.stringify(error.cause)}</Text>
+      </View>
+    )
+  }
+  if (!success) {
+    return (
+      <View>
+        <Text>Migration is in progress</Text>
+      </View>
+    )
+  }
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={DarkTheme}>

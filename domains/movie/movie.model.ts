@@ -1,23 +1,15 @@
 export interface Movie {
-  backdrop_path: string
   id: number
+  movieId: number
   title: string
-  original_title: string
-  overview: string
-  poster_path: string
-  media_type: string
-  adult: boolean
-  original_language: string
-  genre_ids: number[]
-  popularity: number
-  release_date: string
-  video: boolean
-  vote_average: number
-  vote_count: number
+  poster: string
+  backdrop: string
+  year: string
+  category: string
+  watched: boolean
 }
-export interface MovieDetails {
+export interface MovieDetails extends Movie {
   adult: boolean
-  backdrop_path: string
   belongs_to_collection: {
     id: number
     name: string
@@ -30,14 +22,12 @@ export interface MovieDetails {
     name: string
   }[]
   homepage: string
-  id: number
   imdb_id: string
   origin_country: string[]
   original_language: string
   original_title: string
   overview: string
   popularity: number
-  poster_path: string
   production_companies: {
     id: number
     logo_path: string

@@ -26,6 +26,12 @@ dependencies:
   '@gluestack-ui/toast':
     specifier: ^1.0.8
     version: 1.0.8(react-dom@18.3.1)(react-native@0.76.2)(react@18.3.1)
+  '@legendapp/motion':
+    specifier: ^2.4.0
+    version: 2.4.0(nativewind@4.0.36)(react-native@0.76.2)(react@18.3.1)
+  '@monterosa/react-native-parallax-scroll':
+    specifier: ^1.8.0
+    version: 1.8.0
   '@react-navigation/native':
     specifier: ^7.0.0
     version: 7.0.0(react-native@0.76.2)(react@18.3.1)
@@ -35,6 +41,9 @@ dependencies:
   axios:
     specifier: ^1.7.7
     version: 1.7.7
+  babel-plugin-inline-import:
+    specifier: ^3.0.0
+    version: 3.0.0
   babel-plugin-module-resolver:
     specifier: ^5.0.2
     version: 5.0.2
@@ -47,6 +56,9 @@ dependencies:
   expo:
     specifier: ~52.0.7
     version: 52.0.7(@babel/core@7.25.2)(@babel/preset-env@7.26.0)(react-native@0.76.2)(react@18.3.1)
+  expo-drizzle-studio-plugin:
+    specifier: ^0.1.1
+    version: 0.1.1(expo@52.0.7)(react-native@0.76.2)(react@18.3.1)
   expo-font:
     specifier: ~13.0.1
     version: 13.0.1(expo@52.0.7)(react@18.3.1)
@@ -2728,6 +2740,34 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
+  /@legendapp/motion@2.4.0(nativewind@4.0.36)(react-native@0.76.2)(react@18.3.1):
+    resolution: {integrity: sha512-AAYpRLGvxGD5hIGl9sVHyoUufr66zoH82PuxYcKiPSMdCBI3jwZFWh6CuHjV1leRKVIRk2py1rSvIVabG8eqcw==}
+    peerDependencies:
+      nativewind: '*'
+      react: '>=16'
+      react-native: '*'
+    dependencies:
+      '@legendapp/tools': 2.0.1(react@18.3.1)
+      nativewind: 4.0.36(@babel/core@7.25.2)(react-native-reanimated@3.16.1)(react-native-safe-area-context@4.12.0)(react-native-svg@13.4.0)(react-native@0.76.2)(react@18.3.1)(tailwindcss@3.4.15)
+      react: 18.3.1
+      react-native: 0.76.2(@babel/core@7.25.2)(@babel/preset-env@7.26.0)(@types/react@18.3.12)(react@18.3.1)
+    dev: false
+
+  /@legendapp/tools@2.0.1(react@18.3.1):
+    resolution: {integrity: sha512-Kxt0HWvWElRK6oybHRzcYxdgaKGwuaiRNreS7usW7QuHXRIHaH4yMcW2YNRG4DHE5fpefv+Bno/BohQcCE4FaA==}
+    peerDependencies:
+      react: '>=16'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /@monterosa/react-native-parallax-scroll@1.8.0:
+    resolution: {integrity: sha512-fFzJvMNN77d78haErRrZ/X64H0Vjz+5CvXSHBqxjlRQmhUB/R7BnqHwO3WFKGv2/Hv30LpL+0MSfHZeukglvDA==}
+    dev: false
+
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -3841,6 +3881,12 @@ packages:
       slash: 3.0.0
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /babel-plugin-inline-import@3.0.0:
+    resolution: {integrity: sha512-thnykl4FMb8QjMjVCuZoUmAM7r2mnTn5qJwrryCvDv6rugbJlTHZMctdjDtEgD0WBAXJOLJSGXN3loooEwx7UQ==}
+    dependencies:
+      require-resolve: 0.0.2
     dev: false
 
   /babel-plugin-istanbul@6.1.1:
@@ -5088,6 +5134,18 @@ packages:
       react-native: 0.76.2(@babel/core@7.25.2)(@babel/preset-env@7.26.0)(@types/react@18.3.12)(react@18.3.1)
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /expo-drizzle-studio-plugin@0.1.1(expo@52.0.7)(react-native@0.76.2)(react@18.3.1):
+    resolution: {integrity: sha512-OfV79+crmAIMK0jlwmVOMRXdss5rEHtA8vDALPLkjisDSAVEwElzx4OEGuUG/Pf8QlTGUEr7kK3WtCoQvWzo8g==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      expo: 52.0.7(@babel/core@7.25.2)(@babel/preset-env@7.26.0)(react-native@0.76.2)(react@18.3.1)
+      expo-sqlite: 15.0.3(expo@52.0.7)(react-native@0.76.2)(react@18.3.1)
+    transitivePeerDependencies:
+      - react
+      - react-native
     dev: false
 
   /expo-file-system@18.0.4(expo@52.0.7)(react-native@0.76.2):
@@ -7368,6 +7426,10 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
+  /path-extra@1.0.3:
+    resolution: {integrity: sha512-vYm3+GCkjUlT1rDvZnDVhNLXIRvwFPaN8ebHAFcuMJM/H0RBOPD7JrcldiNLd9AS3dhAyUHLa4Hny5wp1A+Ffw==}
+    dev: false
+
   /path-is-absolute@1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
@@ -8068,6 +8130,12 @@ packages:
   /require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /require-resolve@0.0.2:
+    resolution: {integrity: sha512-eafQVaxdQsWUB8HybwognkdcIdKdQdQBwTxH48FuE6WI0owZGKp63QYr1MRp73PoX0AcyB7MDapZThYUY8FD0A==}
+    dependencies:
+      x-path: 0.0.2
     dev: false
 
   /requireg@0.2.2:
@@ -9111,6 +9179,12 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: false
+
+  /x-path@0.0.2:
+    resolution: {integrity: sha512-zQ4WFI0XfJN1uEkkrB19Y4TuXOlHqKSxUJo0Yt+axPjRm8tCG6SJ6+Wo3/+Kjg4c2c8IvBXuJ0uYoshxNn4qMw==}
+    dependencies:
+      path-extra: 1.0.3
     dev: false
 
   /xcode@3.0.1:

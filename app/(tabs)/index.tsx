@@ -9,7 +9,7 @@ export default function Screen() {
   return (
     <ScrollView>
       <Box>
-        <PopularMovieCarousel movies={data?.results || []} />
+        <PopularMovieCarousel movies={data || []} />
         <Box className="p-4 mt-2">
           <Box className="flex gap-2">
             <Text className="text-xl font-bold">Recommended</Text>

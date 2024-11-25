@@ -1,12 +1,7 @@
 import { Movie } from '@/domains/movie/movie.model'
 import Carousel from 'react-native-reanimated-carousel'
 import { Box } from '../ui/box'
-import { Dimensions, Image } from 'react-native'
-import { getFullImageUrl } from '@/util'
-import { LinearGradient } from 'expo-linear-gradient'
-import { Text } from '../ui/text'
-import { Divider } from '../ui/divider'
-import dayjs from 'dayjs'
+import { Dimensions } from 'react-native'
 import { Link } from 'expo-router'
 import MovieHero from '../common/movie-hero'
 

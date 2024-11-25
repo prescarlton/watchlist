@@ -12,6 +12,8 @@ export const db = drizzle(expoDb)
 export const initialize = (): Promise<SQLJsDatabase | ExpoSQLiteDatabase> => {
   return Promise.resolve(db)
 }
+
+export type Db = typeof db
 // export const useMigrationHelper = () => {
 //   return useMigrations(db as ExpoSQLiteDatabase, migrations);
 // };

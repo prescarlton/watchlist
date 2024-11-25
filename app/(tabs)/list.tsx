@@ -1,67 +1,35 @@
+import GridView from '@/components/list/grid-view'
+import ListView from '@/components/list/list-view'
 import Page from '@/components/page'
 import { Box } from '@/components/ui/box'
-import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
-import { ScrollView } from 'react-native'
+import { useSavedMovies } from '@/domains/movie/queries'
+import { useState } from 'react'
 
 export default function Screen() {
-  const movies = [
-    {
-      id: 1,
-      title: 'The Shawshank Redemption',
-      year: 1994,
-      rating: 9.3,
-      genre: 'Drama',
-      director: 'Frank Darabont',
-      cast: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
-    },
-    {
-      id: 2,
-      title: 'The Godfather',
-      year: 1972,
-      rating: 9.2,
-      genre: 'Crime, Drama',
-      director: 'Francis Ford Coppola',
-      cast: ['Marlon Brando', 'Al Pacino', 'James Caan'],
-    },
-    {
-      id: 3,
-      title: 'The Dark Knight',
-      year: 2008,
-      rating: 9.0,
-      genre: 'Action, Crime, Drama',
-      director: 'Christopher Nolan',
-      cast: ['Christian Bale', 'Heath Ledger', 'Aaron Eckhart'],
-    },
-    {
-      id: 4,
-      title: '12 Angry Men',
-      year: 1957,
-      rating: 9.0,
-      genre: 'Drama',
-      director: 'Sidney Lumet',
-      cast: ['Henry Fonda', 'Lee J. Cobb', 'Martin Balsam'],
-    },
-  ]
+  const [view, setView] = useState<'grid' | 'list'>('grid')
+  const { data: savedMovies, isLoading } = useSavedMovies()
+  const toggleView = () => setView((v) => (v === 'grid' ? 'list' : 'grid'))
   return (
     <Page>
-      <Text size="3xl">My List</Text>
-      <ScrollView>
-        <Box className="flex gap-2">
-          {movies.map((movie) => (
-            <Card key={movie.id}>
-              <Box className="h-24 w-4 bg-blue-50 rounded-lg" />
-              <Box className="flex flex-row gap-2">
-                <Text size="lg" className="font-bold">
-                  {movie.title}
-                </Text>
-                <Text size="lg">{movie.year}</Text>
-              </Box>
-              <Text size="md">{movie.genre}</Text>
-            </Card>
-          ))}
-        </Box>
-      </ScrollView>
+      <Box className="flex-row justify-between">
+        <Text size="3xl">My List</Text>
+        <Button onPress={toggleView} className="bg-transparent">
+          <Text>{view}</Text>
+        </Button>
+      </Box>
+      {isLoading ? (
+        <Text>Loading</Text>
+      ) : savedMovies ? (
+        view === 'grid' ? (
+          <GridView movies={savedMovies} />
+        ) : (
+          <ListView movies={savedMovies} />
+        )
+      ) : (
+        <Text>{"You haven't saved any movies yet!"}</Text>
+      )}
     </Page>
   )
 }

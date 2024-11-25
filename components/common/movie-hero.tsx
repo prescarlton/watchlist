@@ -1,11 +1,11 @@
 import { Movie, MovieDetails } from '@/domains/movie/movie.model'
 import { Box } from '../ui/box'
 import { Image } from 'react-native'
-import { getFullImageUrl } from '@/util'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Text } from '../ui/text'
 import { Divider } from '../ui/divider'
 import dayjs from 'dayjs'
+import { getFullImageUrl } from '@/util'
 
 type MovieHeroProps =
   | {
@@ -20,7 +20,7 @@ export default function MovieHero({ movie, showDetails }: MovieHeroProps) {
   return (
     <Box className="w-full h-[600px]">
       <Image
-        source={{ uri: getFullImageUrl(movie.backdrop_path) }}
+        source={{ uri: getFullImageUrl(movie.backdrop) }}
         className="w-full h-full absolute inset-0"
       />
       <Box className="mt-auto flex items-center justify-center p-2 relative min-h-24 pt-24">
