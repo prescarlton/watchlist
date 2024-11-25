@@ -63,7 +63,7 @@ export default function MovieDetailsScreeen() {
         </Button>
       </Box>
       <ParallaxScroll
-        renderParallaxBackground={() => <MovieHero movie={data} showDetails />}
+        renderParallaxBackground={() => <MovieHero movie={data} />}
         parallaxHeight={300}
         parallaxBackgroundScrollSpeed={2.5}
         showsVerticalScrollIndicator={false}
