@@ -1,5 +1,6 @@
 import { Db } from '@/db'
 import { SavedMoviesTable } from '@/db/schema/saved-movie'
+import { takeUnique } from '@/db/util'
 import { eq } from 'drizzle-orm'
 
 export const createMovieRepository = ({
@@ -51,6 +52,7 @@ export const createMovieRepository = ({
         .select()
         .from(savedMovies)
         .where(eq(savedMovies.movieId, movieId))
+        .then(takeUnique)
     },
   }
 }

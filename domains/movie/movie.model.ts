@@ -7,6 +7,7 @@ export interface Movie {
   year: string
   category: string
   watched: boolean
+  saved: boolean
 }
 export interface MovieDetails extends Movie {
   adult: boolean
@@ -59,4 +60,43 @@ export interface ListMoviesResponse {
   results: Movie[]
   total_pages: number
   total_results: number
+}
+
+export interface CastMember {
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string
+  cast_id: number
+  character: string
+  credit_id: string
+  order: number
+}
+export interface CrewMember {
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string
+  credit_id: string
+  department: string
+  job: string
+}
+export interface WatchProviderResponse {
+  flatrate: WatchProvider[]
+  rent: WatchProvider[]
+  buy: WatchProvider[]
+}
+export interface WatchProvider {
+  logo_path: string
+  provider_id: number
+  provider_name: string
+  display_priority: number
 }

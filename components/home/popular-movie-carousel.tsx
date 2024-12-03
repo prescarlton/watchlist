@@ -1,9 +1,9 @@
 import { Movie } from '@/domains/movie/movie.model'
 import Carousel from 'react-native-reanimated-carousel'
 import { Box } from '../ui/box'
-import { Dimensions, Pressable } from 'react-native'
+import { Dimensions, Image, Pressable } from 'react-native'
 import { useRouter } from 'expo-router'
-import MovieHero from '../common/movie-hero'
+import { getFullImageUrl } from '@/util'
 
 interface PopularMovieCarouselProps {
   movies: Movie[]
@@ -20,16 +20,24 @@ export default function PopularMovieCarousel({
     })
   }
   return (
-    <Box className="w-full h-[500px]">
+    <Box className="w-full h-full">
       <Carousel
         data={movies}
         width={width}
         autoPlayInterval={3000}
         renderItem={({ item }) => (
-          <Pressable onPress={() => onPress(item.movieId)}>
-            <MovieHero movie={item} showDetails />
+          <Pressable
+            onPress={() => onPress(item.movieId)}
+            className="rounded-xl"
+          >
+            <Image
+              source={{ uri: getFullImageUrl(item.poster) }}
+              alt={item.title}
+              className="w-full h-full object-contain rounded-xl"
+            />
           </Pressable>
         )}
+        mode="parallax"
         autoPlay
         loop
       />

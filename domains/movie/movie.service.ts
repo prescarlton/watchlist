@@ -1,5 +1,10 @@
 import axios from 'axios'
-import { MovieDetails, ListMoviesResponse, Movie } from './movie.model'
+import {
+  MovieDetails,
+  Movie,
+  CastMember,
+  WatchProviderResponse,
+} from './movie.model'
 import { MovieRepository } from './movie.repository'
 import { getFullImageUrl } from '@/util'
 export const createMovieService = ({
@@ -26,9 +31,10 @@ export const createMovieService = ({
         backdrop: movie.backdrop_path,
         poster: movie.poster_path,
         year: movie.release_date.split('-')[0],
+        saved: false,
       }))
     },
-    async getMovieById(id: string): Promise<MovieDetails> {
+    async getMovieById(id: number): Promise<MovieDetails> {
       const movieData = await api.get(`/movie/${id}`).then((res) => res.data)
       const savedMovie = await this.getSavedMovie(id)
       return {
@@ -41,14 +47,19 @@ export const createMovieService = ({
         watched: savedMovie?.watched || false,
       }
     },
-    async searchMovies(query: string): Promise<ListMoviesResponse> {
-      return api
+    async searchMovies(query: string): Promise<Movie[]> {
+      const movies = await api
         .get('/search/movie', {
           params: {
             query,
           },
         })
-        .then((res) => res.data)
+        .then((res) => res.data.results)
+      return movies.map((mov) => ({
+        ...mov,
+        movieId: mov.id,
+        poster: getFullImageUrl(mov.poster_path),
+      }))
     },
     async saveMovie({
       movieId,
@@ -81,6 +92,7 @@ export const createMovieService = ({
         backdrop: getFullImageUrl(movie.backdrop),
         poster: getFullImageUrl(movie.poster),
         watched: movie.watched === 1,
+        saved: true,
       }))
     },
     async unsaveMovie(movieId: number) {
@@ -91,6 +103,47 @@ export const createMovieService = ({
     },
     async getSavedMovie(movieId: number) {
       return movieRepository.getSavedMovie(movieId)
+    },
+    async getMovieCast(movieId: number): Promise<CastMember[]> {
+      const res = await api
+        .get<{ cast: CastMember[] }>(`/movie/${movieId}/credits`)
+        .then((res) => res.data.cast)
+      return res.map((member) => ({
+        ...member,
+        profile_path: getFullImageUrl(member.profile_path),
+      }))
+    },
+    async getMovieWatchProviders(
+      movieId: number,
+    ): Promise<WatchProviderResponse> {
+      const res = await api
+        .get(`/movie/${movieId}/watch/providers`)
+        .then((res) => res.data.results.US)
+      return res
+    },
+    async getMovieVideos(movieId: number) {
+      return api.get(`/movie/${movieId}/videos`).then((res) => res.data.results)
+    },
+    async getSimilarMovies(movieId: number): Promise<Movie[]> {
+      const res = await api
+        .get(`/movie/${movieId}/similar`)
+        .then((res) => res.data.results)
+      return res.map((movie) => ({
+        ...movie,
+        movieId: movie.id,
+        poster: getFullImageUrl(movie.poster_path),
+      }))
+    },
+    async getMoviesPlayingNow(): Promise<Movie[]> {
+      const movies = await api.get('/movie/now_playing').then((res) => res.data)
+      return movies.results.map((movie) => ({
+        id: movie.id,
+        movieId: movie.id,
+        title: movie.title,
+        backdrop: movie.backdrop_path,
+        poster: getFullImageUrl(movie.poster_path),
+        year: movie.release_date.split('-')[0],
+      }))
     },
   }
 }

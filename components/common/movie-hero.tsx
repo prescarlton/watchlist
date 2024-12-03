@@ -1,35 +1,30 @@
-import { Movie, MovieDetails } from '@/domains/movie/movie.model'
+import { Movie } from '@/domains/movie/movie.model'
 import { Box } from '../ui/box'
 import { Image } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { Text } from '../ui/text'
 import { getFullImageUrl } from '@/util'
 
-type MovieHeroProps =
-  | {
-      showDetails: true
-      movie: Movie
-    }
-  | {
-      showDetails?: never
-      movie: MovieDetails
-    }
+type MovieHeroProps = {
+  showDetails?: boolean
+  movie: Movie
+}
 export default function MovieHero({ movie, showDetails }: MovieHeroProps) {
   return (
     <Box className="w-full h-full">
       <Image
-        source={{ uri: getFullImageUrl(movie.backdrop) }}
-        className="w-full h-full absolute inset-0 object-center"
+        source={{ uri: getFullImageUrl(movie.poster) }}
+        className="w-full h-full absolute object-cover"
       />
       <Box className="mt-auto flex items-center justify-center p-2 relative min-h-24 pt-24">
         <LinearGradient
-          colors={['#18171900', '#181719']}
+          colors={['#00000000', '#000000']}
           style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            height: 200,
+            height: 300,
           }}
         />
         {showDetails && (

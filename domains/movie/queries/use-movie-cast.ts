@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query'
 import { movieKeys } from './keys'
 import { movieService } from '@/services'
 
-export const useMovieDetails = (movieId: number) => {
+export const useMovieCast = (movieId: number) => {
   return useQuery({
-    queryKey: movieKeys.details(movieId),
-    queryFn: () => movieService.getMovieById(movieId),
+    queryKey: movieKeys.cast(movieId),
+    queryFn: () => movieService.getMovieCast(movieId),
   })
 }
