@@ -11,7 +11,7 @@ type MovieHeroProps = {
 }
 export default function MovieHero({ movie, showDetails }: MovieHeroProps) {
   return (
-    <Box className="w-full h-full">
+    <Box className="w-full h-[400px]">
       <Image
         source={{ uri: getFullImageUrl(movie.poster) }}
         className="w-full h-full absolute object-cover"

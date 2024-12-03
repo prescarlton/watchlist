@@ -85,7 +85,7 @@ function RootLayoutNav() {
           }}
         >
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="movie" options={{ headerShown: false }} />
+          <Stack.Screen name="movie" />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>
