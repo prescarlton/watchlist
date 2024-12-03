@@ -13,7 +13,6 @@ import {
 import MovieSheet from '@/components/movie-details/movie-sheet'
 import { useRef } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'
 import MovieRating from '@/components/movie-details/movie-rating'
 import MovieDetailsHeader from '@/components/movie-details/movie-details-header'
 import MovieSubheader from '@/components/movie-details/movie-subheader'
@@ -22,12 +21,11 @@ import MovieOverview from '@/components/movie-details/movie-overview'
 import MovieActionButtons from '@/components/movie-details/movie-action-buttons'
 import MovieCollections from '@/components/movie-details/movie-collections'
 import WhereToWatch from '@/components/movie-details/where-to-watch'
-import { BlurView } from 'expo-blur'
 
 export default function MovieDetailsScreeen() {
   const { id } = useLocalSearchParams() as { id: string }
   const { data, isLoading } = useMovieDetails(Number(id))
-  const { bottom } = useSafeAreaInsets()
+  const { top, bottom } = useSafeAreaInsets()
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null)
   const showModal = () => bottomSheetModalRef.current.present()
@@ -44,6 +42,7 @@ export default function MovieDetailsScreeen() {
             parallaxHeight={400}
             parallaxBackgroundScrollSpeed={4}
             showsVerticalScrollIndicator={false}
+            fadeOutParallaxBackground={true}
           >
             <Box className="flex gap-4 pb-12 -mt-32">
               <LinearGradient
