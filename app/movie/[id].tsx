@@ -4,7 +4,8 @@ import {
 } from '@gorhom/bottom-sheet'
 import { useLocalSearchParams } from 'expo-router'
 import { useRef } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedRef,

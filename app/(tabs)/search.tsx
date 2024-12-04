@@ -1,7 +1,7 @@
 import { debounce } from 'lodash'
 import { useState } from 'react'
-import { ScrollView, StyleSheet, TextInput, View } from 'react-native'
-
+import { ScrollView, TextInput, View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import MoviePosterCard from '@/components/common/movie-poster-card'
 import Page from '@/components/page'
 import { useSearchMovies } from '@/domains/movie/queries'

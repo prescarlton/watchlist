@@ -1,5 +1,6 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
+import { StyleSheet } from 'react-native-unistyles'
 
 import { Text } from '@/components/ui/text'
 import { useWatchProviders } from '@/domains/movie/queries'

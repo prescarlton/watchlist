@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
-
+import { View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import GridView from '@/components/list/grid-view'
 import ListView from '@/components/list/list-view'
 import Page from '@/components/page'

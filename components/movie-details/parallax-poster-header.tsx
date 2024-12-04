@@ -1,6 +1,8 @@
 import { FontAwesome } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
-import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
+import { ImageStyle, ViewStyle } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
+
 import Animated, {
   interpolate,
   SharedValue,

@@ -1,13 +1,14 @@
 import { Ionicons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { router } from 'expo-router'
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
+import { TextStyle, View, ViewStyle } from 'react-native'
 import Animated, {
   interpolate,
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { StyleSheet } from 'react-native-unistyles'
 
 import { Button } from '@/components/ui/button'
 

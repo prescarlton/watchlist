@@ -1,4 +1,5 @@
-import { ScrollView, StyleSheet,View } from 'react-native'
+import { ScrollView, View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 
 import { Movie } from '@/domains/movie/movie.model'
 

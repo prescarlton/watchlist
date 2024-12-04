@@ -1,7 +1,7 @@
 import { useRouter } from 'expo-router'
-import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native'
+import { Dimensions, Image, Pressable, View } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
-
+import { StyleSheet } from 'react-native-unistyles'
 import { Movie } from '@/domains/movie/movie.model'
 import { getFullImageUrl } from '@/util'
 

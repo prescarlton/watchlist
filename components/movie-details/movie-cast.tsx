@@ -1,6 +1,6 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-
+import { StyleSheet } from 'react-native-unistyles'
 import { useMovieCast } from '@/domains/movie/queries'
 
 import { Text } from '../ui/text'

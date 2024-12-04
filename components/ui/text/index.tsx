@@ -1,9 +1,7 @@
 import React from 'react'
-import {
-  StyleSheet,
-  Text as RNText,
-  TextProps as RNTextProps,
-} from 'react-native'
+import { Text as RNText, TextProps as RNTextProps } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
+
 interface TextProps extends RNTextProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   bold?: boolean
@@ -20,6 +18,8 @@ export const Text = React.forwardRef<
     />
   )
 })
+
+Text.displayName = 'Text'
 
 const styles = StyleSheet.create({
   base: {

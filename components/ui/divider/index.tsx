@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
-import { StyleSheet, View, ViewProps } from 'react-native'
+import { View, ViewProps } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 
 interface DividerProps extends ViewProps {
   orientation?: 'vertical' | 'horizontal'

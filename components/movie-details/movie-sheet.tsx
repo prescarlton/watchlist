@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons'
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
 import { useQueryClient } from '@tanstack/react-query'
 import { forwardRef } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'

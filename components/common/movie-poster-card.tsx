@@ -1,6 +1,6 @@
 import { Link } from 'expo-router'
-import { Image, StyleSheet, View } from 'react-native'
-
+import { Image, View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import { Movie } from '@/domains/movie/movie.model'
 
 import { Text } from '../ui/text'

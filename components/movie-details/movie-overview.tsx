@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Modal, StyleSheet, View } from 'react-native'
+import { Modal, View } from 'react-native'
 import { Pressable } from 'react-native-gesture-handler'
+import { StyleSheet } from 'react-native-unistyles'
 
 import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'

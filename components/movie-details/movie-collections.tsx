@@ -1,5 +1,5 @@
-import { Image, StyleSheet, View } from 'react-native'
-
+import { Image, View } from 'react-native'
+import { StyleSheet } from 'react-native-unistyles'
 import { Text } from '@/components/ui/text'
 import { getFullImageUrl } from '@/util'
 
