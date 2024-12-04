@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Box } from '../ui/box'
-import { Text } from '../ui/text'
-import { Modal } from 'react-native'
-import { Button, ButtonText } from '../ui/button'
+import { Text } from '@/components/ui/text'
+import { Modal, StyleSheet, View } from 'react-native'
+import { Button } from '@/components/ui/button'
 import { Pressable } from 'react-native-gesture-handler'
 export default function MovieOverview({ overview }: { overview: string }) {
   const [showMore, setShowMore] = useState(false)
@@ -11,13 +11,11 @@ export default function MovieOverview({ overview }: { overview: string }) {
     overview.slice(0, NUM_CHARS) + (overview.length > NUM_CHARS ? '...' : '')
 
   return (
-    <Box className="flex gap-2 mt-2">
+    <View style={styles.container}>
       <Pressable onPress={() => setShowMore(true)}>
-        <Text className="text-white text-lg">
+        <Text>
           {truncatedOverview}
-          {overview.length > NUM_CHARS && (
-            <Text className="font-extrabold"> MORE</Text>
-          )}
+          {overview.length > NUM_CHARS && <Text bold> MORE</Text>}
         </Text>
       </Pressable>
       <Modal
@@ -27,21 +25,48 @@ export default function MovieOverview({ overview }: { overview: string }) {
         visible={showMore}
         onRequestClose={() => setShowMore(false)}
       >
-        <Box className="flex-1 p-4 gap-4 bg-background-dark">
-          <Box className="flex-row justify-center items-center">
-            <Text className="text-lg font-bold">Overview</Text>
+        <View style={styles.modalContent}>
+          <View style={styles.modalHeader}>
+            <Text bold>Overview</Text>
             <Button
               onPress={() => setShowMore(false)}
               variant="link"
-              size="lg"
-              className="absolute right-0"
+              style={styles.doneButton}
             >
-              <ButtonText className="text-blue-500">Done</ButtonText>
+              Done
             </Button>
-          </Box>
-          <Text className="text-lg px-4">{overview}</Text>
-        </Box>
+          </View>
+          <Text size="lg" style={styles.overview}>
+            {overview}
+          </Text>
+        </View>
       </Modal>
-    </Box>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 7,
+    marginTop: 7,
+  },
+  modalContent: {
+    flex: 1,
+    padding: 14,
+    gap: 14,
+    backgroundColor: '#1c1c1c',
+  },
+  modalHeader: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  doneButton: {
+    position: 'absolute',
+    right: 0,
+  },
+  overview: {
+    paddingHorizontal: 14,
+  },
+})

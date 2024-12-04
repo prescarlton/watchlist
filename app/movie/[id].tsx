@@ -1,4 +1,3 @@
-import { Box } from '@/components/ui/box'
 import { Text } from '@/components/ui/text'
 import { useMovieDetails } from '@/domains/movie/queries'
 import { useLocalSearchParams } from 'expo-router'
@@ -19,7 +18,8 @@ import Animated, {
   useSharedValue,
 } from 'react-native-reanimated'
 import ParallaxPosterHeader from '@/components/movie-details/parallax-poster-header'
-import MovieMedia from '@/components/movie-details/movie-media'
+import { StyleSheet, View } from 'react-native'
+import MovieVideos from '@/components/movie-details/movie-videos'
 
 export default function MovieDetailsScreeen() {
   const { id } = useLocalSearchParams() as { id: string }
@@ -40,7 +40,7 @@ export default function MovieDetailsScreeen() {
   ) : (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <Box>
+        <View>
           <MovieDetailsTopbar
             saved={movie.saved}
             title={movie.title}
@@ -59,26 +59,43 @@ export default function MovieDetailsScreeen() {
               showModal={showModal}
               height={IMG_HEIGHT}
             />
-            <Box className="pt-4 flex gap-4 pb-12 bg-black">
-              <MovieMedia movieId={movie.movieId} />
+            <View style={styles.container}>
+              <MovieVideos movieId={movie.movieId} />
               <WhereToWatch movieId={movie.movieId} />
               <MovieCast movieId={movie.movieId} />
               <MovieCollections collection={movie.belongs_to_collection} />
-              <Box className="flex gap-2 px-4">
-                <Text className="text-lg font-bold">Production Companies</Text>
-                <Text className="">
+              <View style={styles.detailWrapper}>
+                <Text size="lg" bold>
+                  Production Companies
+                </Text>
+                <Text>
                   {movie.production_companies.map((c) => c.name).join(', ')}
                 </Text>
-              </Box>
-              <Box className="flex gap-2 px-4">
-                <Text className="text-lg font-bold">Data</Text>
+              </View>
+              <View style={styles.detailWrapper}>
+                <Text size="lg" bold>
+                  Data
+                </Text>
                 <Text>All data and images are from TMDB</Text>
-              </Box>
-            </Box>
+              </View>
+            </View>
           </Animated.ScrollView>
-        </Box>
+        </View>
         <MovieSheet ref={bottomSheetModalRef} movie={movie} />
       </BottomSheetModalProvider>
     </GestureHandlerRootView>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 16,
+    gap: 16,
+    paddingBottom: 48,
+    backgroundColor: 'black',
+  },
+  detailWrapper: {
+    gap: 8,
+    paddingHorizontal: 16,
+  },
+})

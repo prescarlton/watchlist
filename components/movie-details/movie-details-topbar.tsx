@@ -1,14 +1,13 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Box } from '../ui/box'
-import { Button } from '../ui/button'
-import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Button } from '@/components/ui/button'
+import { Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import Animated, {
   SharedValue,
   interpolate,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import { TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
 import { BlurView } from 'expo-blur'
 
 export default function MovieDetailsTopbar({
@@ -51,32 +50,13 @@ export default function MovieDetailsTopbar({
     }
   })
   return (
-    <Box
-      className="absolute top-0 left-0 right-0 z-10 flex-row items-center justify-between px-4 pb-4 "
-      style={{
-        paddingTop: top,
-      }}
-    >
+    <View style={[styles.container, { paddingTop: top }]}>
       <AnimatedBlurView
         intensity={80}
         tint="dark"
-        style={[
-          {
-            position: 'absolute',
-            inset: 0,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingTop: top,
-            paddingHorizontal: 16,
-            paddingBottom: 8,
-          },
-          blurViewStyle,
-        ]}
+        style={[blurViewStyle, styles.blurView]}
       />
-      <Button
-        onPress={onPressBack}
-        className="rounded-full bg-background-muted/70 p-0 w-10 h-10"
-      >
+      <Button onPress={onPressBack} variant="icon">
         <Ionicons name="chevron-back" size={20} color="white" />
       </Button>
       <Animated.Text
@@ -87,16 +67,37 @@ export default function MovieDetailsTopbar({
       >
         {title}
       </Animated.Text>
-      <Button
-        className="rounded-full bg-background-muted/70 p-0 w-10 h-10"
-        onPress={onPressBookmark}
-      >
+      <Button onPress={onPressBookmark} variant="icon">
         <Ionicons
           name={saved ? 'bookmark' : 'bookmark-outline'}
           size={20}
           color="white"
         />
       </Button>
-    </Box>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 16,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  blurView: {
+    position: 'absolute',
+    inset: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingBottom: 8,
+  },
+})

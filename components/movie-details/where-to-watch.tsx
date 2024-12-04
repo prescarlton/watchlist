@@ -1,21 +1,22 @@
 import { useWatchProviders } from '@/domains/movie/queries'
-import { Box } from '../ui/box'
-import { Text } from '../ui/text'
-import { Image } from 'react-native'
+import { Text } from '@/components/ui/text'
+import { Image, StyleSheet, View } from 'react-native'
 import { getFullImageUrl } from '@/util'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 
 export default function WhereToWatch({ movieId }: { movieId: number }) {
   const { data: providers, isLoading } = useWatchProviders(movieId)
-  return providers ? (
-    <Box className="gap-2">
-      <Text className="pl-4 text-xl font-bold">Where to Watch</Text>
+  return providers?.length ? (
+    <View style={styles.container}>
+      <Text style={styles.header} bold size="lg">
+        Where to Watch
+      </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         directionalLockEnabled
         alwaysBounceVertical={false}
-        className="ps-4"
+        style={styles.scrollView}
       >
         <FlatList
           contentContainerStyle={{ alignSelf: 'flex-start' }}
@@ -26,27 +27,59 @@ export default function WhereToWatch({ movieId }: { movieId: number }) {
           directionalLockEnabled
           alwaysBounceVertical={false}
           renderItem={({ item, index }) => (
-            <Box
-              key={index}
-              className="flex-row h-16 w-56 bg-background-dark/50 rounded-lg items-stretch p-2 my-1 mr-2 gap-2 overflow-hidden"
-            >
+            <View key={index} style={styles.watchProvider}>
               <Image
                 source={{ uri: getFullImageUrl(item.logo_path) }}
                 alt={item.provider_name}
-                className="w-12 h-12 object-cover rounded-md"
+                style={styles.watchProviderLogo}
               />
-              <Box className="flex-1 justify-center">
-                <Text className="font-bold text-sm">{item.watchtype}</Text>
-                <Text className="text-white/50 text-xs">
-                  {item.provider_name}
+              <View style={styles.watchProviderName}>
+                <Text size="sm" bold>
+                  {item.watchtype}
                 </Text>
-              </Box>
-            </Box>
+                <Text size="xs">{item.provider_name}</Text>
+              </View>
+            </View>
           )}
         />
       </ScrollView>
-    </Box>
+    </View>
   ) : (
-    <Text className="ml-4 text-xl font-bold">In Theaters Now</Text>
+    <Text size="lg" style={{ marginLeft: 16 }} bold>
+      In Theaters Now
+    </Text>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 7,
+  },
+  header: {
+    marginLeft: 16,
+  },
+  scrollView: {
+    paddingStart: 16,
+  },
+  watchProvider: {
+    flexDirection: 'row',
+    height: 56,
+    width: 196,
+    gap: 8,
+    backgroundColor: '#ffffff15',
+    borderRadius: 8,
+    padding: 8,
+    marginVertical: 4,
+    marginRight: 8,
+  },
+  watchProviderLogo: {
+    width: 42,
+    height: 42,
+    objectFit: 'cover',
+    borderRadius: 10,
+  },
+  watchProviderName: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+})

@@ -1,14 +1,26 @@
 import { FontAwesome } from '@expo/vector-icons'
-import { Box } from '../ui/box'
-import { Text } from '../ui/text'
+import { Text } from '@/components/ui/text'
+import { StyleSheet, View } from 'react-native'
 
 export default function MovieRating({ rating }: { rating: number }) {
   return (
-    <Box className="flex-row items-center opacity-80 gap-1">
+    <View style={styles.container}>
       <FontAwesome name={'star'} size={12} color={'#eab308'} />
-      <Text className="text-lg font-bold text-yellow-500 mr-1">
+      <Text bold style={styles.text}>
         {rating.toFixed(1)}
       </Text>
-    </Box>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    opacity: 0.8,
+  },
+  text: {
+    color: '#eab308',
+  },
+})

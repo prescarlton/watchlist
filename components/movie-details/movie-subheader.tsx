@@ -1,20 +1,28 @@
 import { MovieDetails } from '@/domains/movie/movie.model'
-import { Box } from '../ui/box'
-import { Text } from '../ui/text'
-import { Divider } from '../ui/divider'
+import { Text } from '@/components/ui/text'
+import { Divider } from '@/components/ui/divider'
 import { formatRuntime } from '@/util'
 import MovieRating from './movie-rating'
+import { StyleSheet, View } from 'react-native'
 
 export default function MovieSubheader({ movie }: { movie: MovieDetails }) {
   return (
-    <Box className="flex-row items-center gap-2">
+    <View style={styles.container}>
       <MovieRating rating={movie.vote_average} />
-      <Divider orientation="vertical" className="h-3/4" />
-      <Text>{movie.year}</Text>
-      <Divider orientation="vertical" className="h-3/4" />
-      <Text>{movie.genres[0].name}</Text>
-      <Divider orientation="vertical" className="h-3/4" />
-      <Text>{formatRuntime(movie.runtime)}</Text>
-    </Box>
+      <Divider orientation="vertical" style={{ height: '75%' }} />
+      <Text size="sm">{movie.year}</Text>
+      <Divider orientation="vertical" style={{ height: '75%' }} />
+      <Text size="sm">{movie.genres[0].name}</Text>
+      <Divider orientation="vertical" style={{ height: '75%' }} />
+      <Text size="sm">{formatRuntime(movie.runtime)}</Text>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+  },
+})

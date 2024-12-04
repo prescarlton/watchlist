@@ -1,11 +1,11 @@
 import GridView from '@/components/list/grid-view'
 import ListView from '@/components/list/list-view'
 import Page from '@/components/page'
-import { Box } from '@/components/ui/box'
-import { Button, ButtonText } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { useSavedMovies } from '@/domains/movie/queries'
 import { useState } from 'react'
+import { StyleSheet, View } from 'react-native'
 
 export default function Screen() {
   const [view, setView] = useState<'grid' | 'list'>('grid')
@@ -13,23 +13,32 @@ export default function Screen() {
   const toggleView = () => setView((v) => (v === 'grid' ? 'list' : 'grid'))
   return (
     <Page>
-      <Box className="flex-row justify-between">
-        <Text size="3xl">My List</Text>
-        <Button onPress={toggleView}>
-          <ButtonText>{view}</ButtonText>
-        </Button>
-      </Box>
-      {isLoading ? (
-        <Text>Loading</Text>
-      ) : savedMovies ? (
-        view === 'grid' ? (
-          <GridView movies={savedMovies} />
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text size="xl">My List</Text>
+          <Button onPress={toggleView}>{view}</Button>
+        </View>
+        {isLoading ? (
+          <Text>Loading</Text>
+        ) : savedMovies ? (
+          view === 'grid' ? (
+            <GridView movies={savedMovies} />
+          ) : (
+            <ListView movies={savedMovies} />
+          )
         ) : (
-          <ListView movies={savedMovies} />
-        )
-      ) : (
-        <Text>{"You haven't saved any movies yet!"}</Text>
-      )}
+          <Text>{"You haven't saved any movies yet!"}</Text>
+        )}
+      </View>
     </Page>
   )
 }
+const styles = StyleSheet.create({
+  container: {
+    gap: 14,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+})

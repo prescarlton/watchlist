@@ -2,38 +2,80 @@ import { useMovieCast } from '@/domains/movie/queries'
 import { Box } from '../ui/box'
 import { Text } from '../ui/text'
 import { ScrollView } from 'react-native-gesture-handler'
-import { Image } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 
 export default function MovieCast({ movieId }: { movieId: number }) {
   const { data, isLoading } = useMovieCast(movieId)
   return (
-    <Box className="flex gap-2">
-      <Text className="text-xl font-bold ml-4">Cast & Crew</Text>
+    <View style={styles.container}>
+      <Text style={styles.header} size="lg" bold>
+        Cast & Crew
+      </Text>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        className="ps-4"
+        style={styles.scrollView}
       >
-        <Box className="flex-row gap-4">
+        <View style={styles.listWrapper}>
           {data?.map((cast) => (
-            <Box key={cast.id} className="items-center gap-1 w-24">
-              <Box className="w-24 h-24 bg-background-dark/50 rounded-xl overflow-hidden">
+            <View key={cast.id} style={styles.castWrapper}>
+              <View style={styles.castPhotoWrapper}>
                 <Image
                   source={{ uri: cast.profile_path }}
                   alt={cast.name}
-                  className="w-full h-full object-cover"
+                  style={styles.castPhoto}
                 />
-              </Box>
-              <Text className="text-sm text-center line-clamp-2">
+              </View>
+              <Text size="sm" style={styles.castName} numberOfLines={2}>
                 {cast.name}
               </Text>
-              <Text className="text-xs opacity-80 text-center line-clamp-2">
+              <Text size="xs" numberOfLines={2} style={styles.castCharacter}>
                 {cast.character}
               </Text>
-            </Box>
+            </View>
           ))}
-        </Box>
+        </View>
       </ScrollView>
-    </Box>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 7,
+  },
+  header: {
+    marginLeft: 16,
+  },
+  scrollView: {
+    paddingStart: 16,
+  },
+  listWrapper: {
+    flexDirection: 'row',
+    gap: 14,
+  },
+  castWrapper: {
+    alignItems: 'center',
+    gap: 3,
+    width: 84,
+  },
+  castPhotoWrapper: {
+    width: 84,
+    height: 84,
+    backgroundColor: '#ffffff15',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  castPhoto: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  castName: {
+    textAlign: 'center',
+  },
+  castCharacter: {
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+})

@@ -1,7 +1,6 @@
 import { Movie } from '@/domains/movie/movie.model'
 import Carousel from 'react-native-reanimated-carousel'
-import { Box } from '../ui/box'
-import { Dimensions, Image, Pressable } from 'react-native'
+import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native'
 import { useRouter } from 'expo-router'
 import { getFullImageUrl } from '@/util'
 
@@ -20,7 +19,7 @@ export default function PopularMovieCarousel({
     })
   }
   return (
-    <Box className="w-full h-full">
+    <View style={styles.container}>
       <Carousel
         data={movies}
         width={width}
@@ -28,19 +27,35 @@ export default function PopularMovieCarousel({
         renderItem={({ item }) => (
           <Pressable
             onPress={() => onPress(item.movieId)}
-            className="rounded-xl"
+            style={styles.pressable}
           >
             <Image
               source={{ uri: getFullImageUrl(item.poster) }}
               alt={item.title}
-              className="w-full h-full object-contain rounded-xl"
+              style={styles.image}
             />
           </Pressable>
         )}
         mode="parallax"
-        autoPlay
+        // autoPlay
         loop
       />
-    </Box>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    height: 700,
+  },
+  pressable: {
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+    objectFit: 'cover',
+  },
+})

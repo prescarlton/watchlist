@@ -1,17 +1,16 @@
 import { getFullImageUrl } from '@/util'
-import { ImageStyle, ViewStyle } from 'react-native'
+import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 import Animated, {
   SharedValue,
   interpolate,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import MovieDetailsHeader from './movie-details-header'
 import { MovieDetails } from '@/domains/movie/movie.model'
 import { LinearGradient } from 'expo-linear-gradient'
-import { Text } from '../ui/text'
+import { Text } from '@/components/ui/text'
 import MovieSubheader from './movie-subheader'
 import MovieOverview from './movie-overview'
-import { Button, ButtonText } from '../ui/button'
+import { Button } from '@/components/ui/button'
 import { FontAwesome } from '@expo/vector-icons'
 
 interface ParallaxPosterHeaderProps {
@@ -98,19 +97,37 @@ export default function ParallaxPosterHeader({
           ]}
         />
 
-        <Animated.View
-          className="flex mt-auto gap-1 p-4 z-10"
-          style={containerStyle}
-        >
-          <Text className="text-3xl font-bold">{movie.title}</Text>
+        <Animated.View style={[containerStyle, styles.container]}>
+          <Text style={styles.movieTitle}>{movie.title}</Text>
           <MovieSubheader movie={movie} />
           <MovieOverview overview={movie.overview} />
-          <Button className="w-3/4 my-2 rounded-lg" onPress={showModal}>
-            <FontAwesome name="bookmark-o" size={16} />
-            <ButtonText>Add to List</ButtonText>
+          <Button
+            onPress={showModal}
+            style={styles.button}
+            leftIcon={<FontAwesome name="bookmark-o" size={16} />}
+          >
+            Add to List
           </Button>
         </Animated.View>
       </Animated.View>
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 'auto',
+    gap: 4,
+    padding: 16,
+    zIndex: 10,
+  },
+  movieTitle: {
+    fontSize: 30,
+    lineHeight: 36,
+    fontWeight: 'bold',
+  },
+  button: {
+    width: '75%',
+    marginVertical: 8,
+  },
+})

@@ -1,7 +1,6 @@
 import { Movie } from '@/domains/movie/movie.model'
 import { Link } from 'expo-router'
-import { Box } from '../ui/box'
-import { Image } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import { Text } from '../ui/text'
 
 export default function MoviePosterCard({ movie }: { movie: Movie }) {
@@ -13,20 +12,38 @@ export default function MoviePosterCard({ movie }: { movie: Movie }) {
         params: { id: movie.movieId },
       }}
     >
-      <Box
-        key={movie.id}
-        className="flex items-center relative justify-center w-32 h-48 rounded-lg bg-background-muted"
-      >
-        <Box className="items-center absolute">
-          <Text className="font-bold">{movie.title}</Text>
+      <View key={movie.id} style={styles.imageWrapper}>
+        <View style={styles.imageFallback}>
+          <Text bold>{movie.title}</Text>
           <Text>{movie.year}</Text>
-        </Box>
+        </View>
         <Image
           source={{ uri: movie.poster }}
           alt={movie.title}
-          className="w-full h-full object-cover rounded-lg"
+          style={styles.image}
         />
-      </Box>
+      </View>
     </Link>
   )
 }
+
+const styles = StyleSheet.create({
+  imageWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 114,
+    height: 168,
+    backgroundColor: '#ffffff15',
+    borderRadius: 10,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    borderRadius: 10,
+  },
+  imageFallback: {
+    position: 'absolute',
+    textAlign: 'center',
+  },
+})

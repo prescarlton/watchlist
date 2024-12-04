@@ -1,15 +1,16 @@
 import { MovieDetails } from '@/domains/movie/movie.model'
 import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
-import { Text } from '../ui/text'
-import { Button, ButtonText } from '../ui/button'
+import { Text } from '@/components/ui/text'
+import { Button } from '@/components/ui/button'
 import { useSaveMovie } from '@/domains/movie/queries'
 import { useQueryClient } from '@tanstack/react-query'
 import { movieKeys } from '@/domains/movie/queries/keys'
 import { Feather } from '@expo/vector-icons'
 import { useUnsaveMovie } from '@/domains/movie/queries/use-unsave-movie'
-import BottomSheetBackdrop from '../ui/bottom-sheet-backdrop'
+import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'
 import { forwardRef } from 'react'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { StyleSheet } from 'react-native'
 
 interface MovieSheetProps {
   movie: MovieDetails
@@ -74,37 +75,37 @@ const MovieSheet = forwardRef<Ref, MovieSheetProps>(function MovieSheet(
         />
       )}
     >
-      <BottomSheetView className="bg-transparent gap-4 justify-end">
-        <Text className="text-center font-bold text-xl">{movie.title}</Text>
+      <BottomSheetView style={styles.container}>
+        <Text size="xl" bold style={styles.movieTitle}>
+          {movie.title}
+        </Text>
         <Button
-          className="bg-background-muted shadow-xl rounded-xl"
-          size="xl"
           onPress={toggleSaveMovie}
+          leftIcon={<Feather name={movie.saved ? 'minus' : 'plus'} size={24} />}
         >
-          <ButtonText className="text-white">
-            {movie.saved ? 'Remove from list' : 'Add to list'}
-          </ButtonText>
-          <Feather
-            name={movie.saved ? 'minus' : 'plus'}
-            color="white"
-            size={24}
-          />
+          {movie.saved ? 'Remove from list' : 'Add to list'}
         </Button>
-        <Button className="bg-background-muted shadow-xl rounded-xl" size="xl">
-          <ButtonText className="text-white">Watch</ButtonText>
-          <Feather name="eye" color="white" size={32} />
-        </Button>
+        <Button leftIcon={<Feather name="eye" size={32} />}>Watch</Button>
         <Button
-          className="bg-background-muted rounded-xl h-12 shadow-xl"
-          size="xl"
           // @ts-expect-error: TS doesn't understand this ref type here
           onPress={() => ref.current?.dismiss()}
         >
-          <ButtonText className="text-white">Done</ButtonText>
+          Done
         </Button>
       </BottomSheetView>
     </BottomSheetModal>
   )
+})
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'transparent',
+    gap: 14,
+    justifyContent: 'flex-end',
+  },
+  movieTitle: {
+    textAlign: 'center',
+  },
 })
 
 export default MovieSheet

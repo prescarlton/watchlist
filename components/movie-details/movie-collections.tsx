@@ -1,6 +1,5 @@
-import { Image } from 'react-native'
-import { Box } from '../ui/box'
-import { Text } from '../ui/text'
+import { Image, StyleSheet, View } from 'react-native'
+import { Text } from '@/components/ui/text'
 import { getFullImageUrl } from '@/util'
 
 export default function MovieCollections({
@@ -13,15 +12,39 @@ export default function MovieCollections({
   }
 } | null) {
   return collection ? (
-    <Box className="flex gap-2 px-4">
-      <Text className="text-xl font-bold ">Collections</Text>
-      <Box className="h-48 w-32 bg-background-muted rounded-xl overflow-hidden">
+    <View style={styles.container}>
+      <Text size="lg" bold>
+        Collections
+      </Text>
+      <View style={styles.collectionImageWrapper}>
         <Image
           source={{ uri: getFullImageUrl(collection.poster_path) }}
           alt={collection.name}
-          className="w-full h-full object-cover"
+          style={styles.collectionImage}
         />
-      </Box>
-    </Box>
+      </View>
+    </View>
   ) : null
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 7,
+    paddingHorizontal: 14,
+  },
+  scrollView: {
+    paddingStart: 16,
+  },
+  collectionImageWrapper: {
+    height: 168,
+    width: 112,
+    backgroundColor: '#ffffff15',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  collectionImage: {
+    width: 112,
+    height: 168,
+    objectFit: 'cover',
+  },
+})
