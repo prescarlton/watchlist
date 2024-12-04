@@ -89,14 +89,21 @@ export interface CrewMember {
   department: string
   job: string
 }
-export interface WatchProviderResponse {
-  flatrate: WatchProvider[]
-  rent: WatchProvider[]
-  buy: WatchProvider[]
+export interface GetWatchProvidersApiResponse {
+  results: {
+    US: {
+      link: string
+      ads: WatchProvider[]
+      flatrate: WatchProvider[]
+      rent: WatchProvider[]
+      buy: WatchProvider[]
+    }
+  }
 }
 export interface WatchProvider {
   logo_path: string
   provider_id: number
   provider_name: string
   display_priority: number
+  watchtype: string
 }

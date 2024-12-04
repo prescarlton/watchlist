@@ -1,10 +1,9 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { Box } from '../ui/box'
 import { Button } from '../ui/button'
-import { Feather, FontAwesome } from '@expo/vector-icons'
+import { Feather, FontAwesome, Ionicons } from '@expo/vector-icons'
 import { router } from 'expo-router'
 import Animated, {
-  Extrapolation,
   SharedValue,
   interpolate,
   useAnimatedStyle,
@@ -12,14 +11,16 @@ import Animated, {
 import { TextStyle, ViewStyle } from 'react-native'
 import { BlurView } from 'expo-blur'
 
-export default function MovieDetailsHeader({
+export default function MovieDetailsTopbar({
   showModal,
   saved,
+  title,
   scrollOffset,
   headerHeight,
 }: {
   showModal: () => void
   saved: boolean
+  title: string
   scrollOffset: SharedValue<number>
   headerHeight: number
 }) {
@@ -74,9 +75,9 @@ export default function MovieDetailsHeader({
       />
       <Button
         onPress={onPressBack}
-        className="rounded-xl bg-background-muted/70 p-0 w-8 h-8"
+        className="rounded-full bg-background-muted/70 p-0 w-10 h-10"
       >
-        <Feather name="chevron-left" size={20} color="white" />
+        <Ionicons name="chevron-back" size={20} color="white" />
       </Button>
       <Animated.Text
         style={[
@@ -84,14 +85,14 @@ export default function MovieDetailsHeader({
           titleStyle,
         ]}
       >
-        test
+        {title}
       </Animated.Text>
       <Button
-        className="rounded-xl bg-background-muted/70 p-0 w-8 h-8"
+        className="rounded-full bg-background-muted/70 p-0 w-10 h-10"
         onPress={onPressBookmark}
       >
-        <FontAwesome
-          name={saved ? 'bookmark' : 'bookmark-o'}
+        <Ionicons
+          name={saved ? 'bookmark' : 'bookmark-outline'}
           size={20}
           color="white"
         />

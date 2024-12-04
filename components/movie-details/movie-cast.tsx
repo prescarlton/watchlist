@@ -17,7 +17,7 @@ export default function MovieCast({ movieId }: { movieId: number }) {
         <Box className="flex-row gap-4">
           {data?.map((cast) => (
             <Box key={cast.id} className="items-center gap-1 w-24">
-              <Box className="w-24 h-24 bg-background-muted rounded-xl overflow-hidden">
+              <Box className="w-24 h-24 bg-background-dark/50 rounded-xl overflow-hidden">
                 <Image
                   source={{ uri: cast.profile_path }}
                   alt={cast.name}

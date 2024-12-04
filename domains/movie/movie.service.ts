@@ -3,10 +3,12 @@ import {
   MovieDetails,
   Movie,
   CastMember,
-  WatchProviderResponse,
+  GetWatchProvidersApiResponse,
+  WatchProvider,
 } from './movie.model'
 import { MovieRepository } from './movie.repository'
 import { getFullImageUrl } from '@/util'
+import _, { groupBy } from 'lodash'
 export const createMovieService = ({
   movieRepository,
 }: {
@@ -113,13 +115,37 @@ export const createMovieService = ({
         profile_path: getFullImageUrl(member.profile_path),
       }))
     },
-    async getMovieWatchProviders(
-      movieId: number,
-    ): Promise<WatchProviderResponse> {
+    async getMovieWatchProviders(movieId: number): Promise<WatchProvider[]> {
       const res = await api
-        .get(`/movie/${movieId}/watch/providers`)
+        .get<GetWatchProvidersApiResponse>(`/movie/${movieId}/watch/providers`)
         .then((res) => res.data.results.US)
-      return res
+      if (!res) return []
+      const providers = [] as WatchProvider[]
+      if (res.ads)
+        providers.push(...res.ads.map((p) => ({ ...p, watchtype: 'Ads' })))
+      if (res.buy)
+        providers.push(...res.buy.map((p) => ({ ...p, watchtype: 'Buy' })))
+      if (res.flatrate)
+        providers.push(
+          ...res.flatrate.map((p) => ({ ...p, watchtype: 'Stream' })),
+        )
+      if (res.rent)
+        providers.push(...res.rent.map((p) => ({ ...p, watchtype: 'Rent' })))
+
+      // Sort by display priority, then group by provider
+      const sorted = providers.sort(
+        (a, b) => a.display_priority - b.display_priority,
+      )
+      return _(sorted)
+        .groupBy('provider_id')
+        .map((group) => ({
+          provider_id: group[0].provider_id,
+          provider_name: group[0].provider_name,
+          watchtype: _.uniq(group.map((item) => item.watchtype)).join(' / '),
+          logo_path: group[0].logo_path,
+          display_priority: group[0].display_priority,
+        }))
+        .value()
     },
     async getMovieVideos(movieId: number) {
       return api.get(`/movie/${movieId}/videos`).then((res) => res.data.results)

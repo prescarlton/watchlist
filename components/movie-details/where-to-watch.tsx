@@ -3,46 +3,48 @@ import { Box } from '../ui/box'
 import { Text } from '../ui/text'
 import { Image } from 'react-native'
 import { getFullImageUrl } from '@/util'
+import { FlatList, ScrollView } from 'react-native-gesture-handler'
 
 export default function WhereToWatch({ movieId }: { movieId: number }) {
-  const { data, isLoading } = useWatchProviders(movieId)
-  return data ? (
-    <Box className="gap-4 px-4">
-      <Text className="text-xl font-bold">Where to Watch</Text>
-      <Box className="flex-row items-center gap-2 justify-between">
-        <Text className="opacity-80">Stream</Text>
-        <Box className="flex-row gap-2">
-          {data?.flatrate?.slice(0, 5).map((provider) => (
+  const { data: providers, isLoading } = useWatchProviders(movieId)
+  return providers ? (
+    <Box className="gap-2">
+      <Text className="pl-4 text-xl font-bold">Where to Watch</Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        directionalLockEnabled
+        alwaysBounceVertical={false}
+        className="ps-4"
+      >
+        <FlatList
+          contentContainerStyle={{ alignSelf: 'flex-start' }}
+          data={providers}
+          numColumns={Math.ceil(providers.length / 2)}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          directionalLockEnabled
+          alwaysBounceVertical={false}
+          renderItem={({ item, index }) => (
             <Box
-              key={provider.provider_id}
-              className="h-12 w-12 bg-background-muted rounded-lg overflow-hidden"
+              key={index}
+              className="flex-row h-16 w-56 bg-background-dark/50 rounded-lg items-stretch p-2 my-1 mr-2 gap-2 overflow-hidden"
             >
               <Image
-                source={{ uri: getFullImageUrl(provider.logo_path) }}
-                alt={provider.provider_name}
-                className="w-full h-full object-cover"
+                source={{ uri: getFullImageUrl(item.logo_path) }}
+                alt={item.provider_name}
+                className="w-12 h-12 object-cover rounded-md"
               />
+              <Box className="flex-1 justify-center">
+                <Text className="font-bold text-sm">{item.watchtype}</Text>
+                <Text className="text-white/50 text-xs">
+                  {item.provider_name}
+                </Text>
+              </Box>
             </Box>
-          ))}
-        </Box>
-      </Box>
-      <Box className="flex-row items-center gap-2 justify-between">
-        <Text className="opacity-80">Rent</Text>
-        <Box className="flex-row gap-2">
-          {data?.rent?.slice(0, 5).map((provider) => (
-            <Box
-              key={provider.provider_id}
-              className="h-12 w-12 bg-background-muted rounded-lg overflow-hidden"
-            >
-              <Image
-                source={{ uri: getFullImageUrl(provider.logo_path) }}
-                alt={provider.provider_name}
-                className="w-full h-full object-cover"
-              />
-            </Box>
-          ))}
-        </Box>
-      </Box>
+          )}
+        />
+      </ScrollView>
     </Box>
   ) : (
     <Text className="ml-4 text-xl font-bold">In Theaters Now</Text>
