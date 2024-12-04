@@ -1,11 +1,12 @@
+import { useState } from 'react'
+import { StyleSheet, View } from 'react-native'
+
 import GridView from '@/components/list/grid-view'
 import ListView from '@/components/list/list-view'
 import Page from '@/components/page'
 import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
 import { useSavedMovies } from '@/domains/movie/queries'
-import { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
 
 export default function Screen() {
   const [view, setView] = useState<'grid' | 'list'>('grid')

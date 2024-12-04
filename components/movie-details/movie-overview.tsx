@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Box } from '../ui/box'
-import { Text } from '@/components/ui/text'
 import { Modal, StyleSheet, View } from 'react-native'
-import { Button } from '@/components/ui/button'
 import { Pressable } from 'react-native-gesture-handler'
+
+import { Button } from '@/components/ui/button'
+import { Text } from '@/components/ui/text'
 export default function MovieOverview({ overview }: { overview: string }) {
   const [showMore, setShowMore] = useState(false)
   const NUM_CHARS = 130

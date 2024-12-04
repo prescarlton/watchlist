@@ -1,5 +1,7 @@
+import { ScrollView, StyleSheet,View } from 'react-native'
+
 import { Movie } from '@/domains/movie/movie.model'
-import { View, ScrollView, StyleSheet } from 'react-native'
+
 import MoviePosterCard from '../common/movie-poster-card'
 
 export default function GridView({ movies }: { movies: Movie[] }) {

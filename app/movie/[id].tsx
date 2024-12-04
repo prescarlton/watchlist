@@ -1,25 +1,26 @@
-import { Text } from '@/components/ui/text'
-import { useMovieDetails } from '@/domains/movie/queries'
-import { useLocalSearchParams } from 'expo-router'
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet'
-import MovieSheet from '@/components/movie-details/movie-sheet'
+import { useLocalSearchParams } from 'expo-router'
 import { useRef } from 'react'
+import { StyleSheet, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import MovieDetailsTopbar from '@/components/movie-details/movie-details-topbar'
-import MovieCast from '@/components/movie-details/movie-cast'
-import MovieCollections from '@/components/movie-details/movie-collections'
-import WhereToWatch from '@/components/movie-details/where-to-watch'
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated'
-import ParallaxPosterHeader from '@/components/movie-details/parallax-poster-header'
-import { StyleSheet, View } from 'react-native'
+
+import MovieCast from '@/components/movie-details/movie-cast'
+import MovieCollections from '@/components/movie-details/movie-collections'
+import MovieDetailsTopbar from '@/components/movie-details/movie-details-topbar'
+import MovieSheet from '@/components/movie-details/movie-sheet'
 import MovieVideos from '@/components/movie-details/movie-videos'
+import ParallaxPosterHeader from '@/components/movie-details/parallax-poster-header'
+import WhereToWatch from '@/components/movie-details/where-to-watch'
+import { Text } from '@/components/ui/text'
+import { useMovieDetails } from '@/domains/movie/queries'
 
 export default function MovieDetailsScreeen() {
   const { id } = useLocalSearchParams() as { id: string }

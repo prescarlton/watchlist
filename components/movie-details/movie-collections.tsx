@@ -1,4 +1,5 @@
 import { Image, StyleSheet, View } from 'react-native'
+
 import { Text } from '@/components/ui/text'
 import { getFullImageUrl } from '@/util'
 

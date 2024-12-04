@@ -1,6 +1,7 @@
 import { FontAwesome } from '@expo/vector-icons'
-import { Text } from '@/components/ui/text'
 import { StyleSheet, View } from 'react-native'
+
+import { Text } from '@/components/ui/text'
 
 export default function MovieRating({ rating }: { rating: number }) {
   return (

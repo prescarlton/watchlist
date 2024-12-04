@@ -1,11 +1,12 @@
-import { useMovieCast } from '@/domains/movie/queries'
-import { Box } from '../ui/box'
-import { Text } from '../ui/text'
-import { ScrollView } from 'react-native-gesture-handler'
 import { Image, StyleSheet, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+
+import { useMovieCast } from '@/domains/movie/queries'
+
+import { Text } from '../ui/text'
 
 export default function MovieCast({ movieId }: { movieId: number }) {
-  const { data, isLoading } = useMovieCast(movieId)
+  const { data } = useMovieCast(movieId)
   return (
     <View style={styles.container}>
       <Text style={styles.header} size="lg" bold>

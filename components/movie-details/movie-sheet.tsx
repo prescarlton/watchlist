@@ -1,16 +1,17 @@
-import { MovieDetails } from '@/domains/movie/movie.model'
-import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
-import { Text } from '@/components/ui/text'
-import { Button } from '@/components/ui/button'
-import { useSaveMovie } from '@/domains/movie/queries'
-import { useQueryClient } from '@tanstack/react-query'
-import { movieKeys } from '@/domains/movie/queries/keys'
 import { Feather } from '@expo/vector-icons'
-import { useUnsaveMovie } from '@/domains/movie/queries/use-unsave-movie'
-import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'
+import { BottomSheetModal, BottomSheetView } from '@gorhom/bottom-sheet'
+import { useQueryClient } from '@tanstack/react-query'
 import { forwardRef } from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { StyleSheet } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'
+import { Button } from '@/components/ui/button'
+import { Text } from '@/components/ui/text'
+import { MovieDetails } from '@/domains/movie/movie.model'
+import { useSaveMovie } from '@/domains/movie/queries'
+import { movieKeys } from '@/domains/movie/queries/keys'
+import { useUnsaveMovie } from '@/domains/movie/queries/use-unsave-movie'
 
 interface MovieSheetProps {
   movie: MovieDetails

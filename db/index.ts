@@ -1,8 +1,8 @@
 import type { ExpoSQLiteDatabase } from 'drizzle-orm/expo-sqlite'
 import { drizzle } from 'drizzle-orm/expo-sqlite'
-import { openDatabaseSync } from 'expo-sqlite'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import type { SQLJsDatabase } from 'drizzle-orm/sql-js'
+import { openDatabaseSync } from 'expo-sqlite'
 
 // import migrations from "./migrations/migrations";
 

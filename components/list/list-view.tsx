@@ -1,6 +1,7 @@
-import { Movie } from '@/domains/movie/movie.model'
 import { ScrollView, StyleSheet, View } from 'react-native'
+
 import { Text } from '@/components/ui/text'
+import { Movie } from '@/domains/movie/movie.model'
 
 export default function ListView({ movies }: { movies: Movie[] }) {
   return (

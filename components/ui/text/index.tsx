@@ -1,9 +1,8 @@
 import React from 'react'
-
 import {
+  StyleSheet,
   Text as RNText,
   TextProps as RNTextProps,
-  StyleSheet,
 } from 'react-native'
 interface TextProps extends RNTextProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'

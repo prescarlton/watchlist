@@ -1,9 +1,11 @@
-import { MovieDetails } from '@/domains/movie/movie.model'
-import { Text } from '@/components/ui/text'
-import { Divider } from '@/components/ui/divider'
-import { formatRuntime } from '@/util'
-import MovieRating from './movie-rating'
 import { StyleSheet, View } from 'react-native'
+
+import { Divider } from '@/components/ui/divider'
+import { Text } from '@/components/ui/text'
+import { MovieDetails } from '@/domains/movie/movie.model'
+import { formatRuntime } from '@/util'
+
+import MovieRating from './movie-rating'
 
 export default function MovieSubheader({ movie }: { movie: MovieDetails }) {
   return (

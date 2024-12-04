@@ -1,14 +1,15 @@
-import MoviePosterCard from '@/components/common/movie-poster-card'
-import Page from '@/components/page'
-import { useSearchMovies } from '@/domains/movie/queries'
 import { debounce } from 'lodash'
 import { useState } from 'react'
 import { ScrollView, StyleSheet, TextInput, View } from 'react-native'
 
+import MoviePosterCard from '@/components/common/movie-poster-card'
+import Page from '@/components/page'
+import { useSearchMovies } from '@/domains/movie/queries'
+
 export default function Screen() {
   const [query, setQuery] = useState('')
 
-  const { data, isLoading } = useSearchMovies(query)
+  const { data } = useSearchMovies(query)
 
   const onSearchChange = debounce((text: string) => {
     setQuery(text)

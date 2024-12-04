@@ -1,14 +1,16 @@
 import axios from 'axios'
+import _, { groupBy } from 'lodash'
+
+import { getFullImageUrl } from '@/util'
+
 import {
-  MovieDetails,
-  Movie,
   CastMember,
   GetWatchProvidersApiResponse,
+  Movie,
+  MovieDetails,
   WatchProvider,
 } from './movie.model'
 import { MovieRepository } from './movie.repository'
-import { getFullImageUrl } from '@/util'
-import _, { groupBy } from 'lodash'
 export const createMovieService = ({
   movieRepository,
 }: {

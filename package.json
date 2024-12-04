@@ -7,7 +7,8 @@
     "android": "DARK_MODE=media expo start --android",
     "ios": "DARK_MODE=media expo start --ios",
     "web": "DARK_MODE=media expo start --web",
-    "db:reset": "tsx ./db/reset.ts"
+    "db:reset": "tsx ./db/reset.ts",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
@@ -52,6 +53,9 @@
     "@types/lodash": "^4.17.13",
     "@types/react": "~18.3.12",
     "drizzle-kit": "^0.28.1",
+    "eslint": "^8.57.0",
+    "eslint-config-expo": "~8.0.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "jscodeshift": "0.15.2",
     "prettier": "^3.3.3",
     "react-test-renderer": "18.3.1",

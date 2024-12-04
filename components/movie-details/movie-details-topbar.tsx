@@ -1,14 +1,15 @@
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { Button } from '@/components/ui/button'
 import { Ionicons } from '@expo/vector-icons'
+import { BlurView } from 'expo-blur'
 import { router } from 'expo-router'
+import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
 import Animated, {
-  SharedValue,
   interpolate,
+  SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import { StyleSheet, TextStyle, View, ViewStyle } from 'react-native'
-import { BlurView } from 'expo-blur'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+
+import { Button } from '@/components/ui/button'
 
 export default function MovieDetailsTopbar({
   showModal,

@@ -1,7 +1,8 @@
+import { eq } from 'drizzle-orm'
+
 import { Db } from '@/db'
 import { SavedMoviesTable } from '@/db/schema/saved-movie'
 import { takeUnique } from '@/db/util'
-import { eq } from 'drizzle-orm'
 
 export const createMovieRepository = ({
   db,

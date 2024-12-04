@@ -1,7 +1,8 @@
-import { Movie } from '@/domains/movie/movie.model'
-import Carousel from 'react-native-reanimated-carousel'
-import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native'
 import { useRouter } from 'expo-router'
+import { Dimensions, Image, Pressable, StyleSheet, View } from 'react-native'
+import Carousel from 'react-native-reanimated-carousel'
+
+import { Movie } from '@/domains/movie/movie.model'
 import { getFullImageUrl } from '@/util'
 
 interface PopularMovieCarouselProps {

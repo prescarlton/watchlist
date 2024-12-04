@@ -1,6 +1,7 @@
-import { ScrollView } from 'react-native-gesture-handler'
-import { Text } from '@/components/ui/text'
 import { StyleSheet, View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+
+import { Text } from '@/components/ui/text'
 
 export default function MovieVideos({ movieId }: { movieId: number }) {
   return (

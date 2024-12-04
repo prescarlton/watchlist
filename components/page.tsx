@@ -1,6 +1,6 @@
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ReactNode } from 'react'
 import { View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function SafeAreaPage({ children }: { children: ReactNode }) {
   const { top } = useSafeAreaInsets()

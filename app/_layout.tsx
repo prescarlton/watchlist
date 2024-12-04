@@ -1,17 +1,18 @@
+import 'react-native-reanimated'
+
 import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { DarkTheme, ThemeProvider } from '@react-navigation/native'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
-import 'react-native-reanimated'
-import migrations from '@/db/migrations/migrations'
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { View } from 'react-native'
+
 import { Text } from '@/components/ui/text'
-import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import { db } from '@/db'
+import migrations from '@/db/migrations/migrations'
 
 export {
   // Catch any errors thrown by the Layout component.

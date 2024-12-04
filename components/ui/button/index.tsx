@@ -1,7 +1,7 @@
 'use client'
 import React, { ReactNode } from 'react'
 import type { PressableProps } from 'react-native'
-import { Pressable, Text, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet,Text } from 'react-native'
 
 interface ButtonProps extends PressableProps {
   variant?: 'solid' | 'outline' | 'link' | 'ghost' | 'icon'

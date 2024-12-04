@@ -1,11 +1,12 @@
-import { useWatchProviders } from '@/domains/movie/queries'
-import { Text } from '@/components/ui/text'
 import { Image, StyleSheet, View } from 'react-native'
-import { getFullImageUrl } from '@/util'
 import { FlatList, ScrollView } from 'react-native-gesture-handler'
 
+import { Text } from '@/components/ui/text'
+import { useWatchProviders } from '@/domains/movie/queries'
+import { getFullImageUrl } from '@/util'
+
 export default function WhereToWatch({ movieId }: { movieId: number }) {
-  const { data: providers, isLoading } = useWatchProviders(movieId)
+  const { data: providers } = useWatchProviders(movieId)
   return providers?.length ? (
     <View style={styles.container}>
       <Text style={styles.header} bold size="lg">

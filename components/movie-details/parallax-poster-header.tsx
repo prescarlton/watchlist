@@ -1,17 +1,19 @@
-import { getFullImageUrl } from '@/util'
+import { FontAwesome } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
 import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 import Animated, {
-  SharedValue,
   interpolate,
+  SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated'
-import { MovieDetails } from '@/domains/movie/movie.model'
-import { LinearGradient } from 'expo-linear-gradient'
-import { Text } from '@/components/ui/text'
-import MovieSubheader from './movie-subheader'
-import MovieOverview from './movie-overview'
+
 import { Button } from '@/components/ui/button'
-import { FontAwesome } from '@expo/vector-icons'
+import { Text } from '@/components/ui/text'
+import { MovieDetails } from '@/domains/movie/movie.model'
+import { getFullImageUrl } from '@/util'
+
+import MovieOverview from './movie-overview'
+import MovieSubheader from './movie-subheader'
 
 interface ParallaxPosterHeaderProps {
   movie: MovieDetails

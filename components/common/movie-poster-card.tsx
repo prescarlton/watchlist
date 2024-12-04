@@ -1,6 +1,8 @@
-import { Movie } from '@/domains/movie/movie.model'
 import { Link } from 'expo-router'
 import { Image, StyleSheet, View } from 'react-native'
+
+import { Movie } from '@/domains/movie/movie.model'
+
 import { Text } from '../ui/text'
 
 export default function MoviePosterCard({ movie }: { movie: Movie }) {
