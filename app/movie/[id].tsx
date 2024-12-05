@@ -5,13 +5,13 @@ import {
 import { useLocalSearchParams } from 'expo-router'
 import { useRef } from 'react'
 import { View } from 'react-native'
-import { StyleSheet } from 'react-native-unistyles'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
   useSharedValue,
 } from 'react-native-reanimated'
+import { StyleSheet } from 'react-native-unistyles'
 
 import MovieCast from '@/components/movie-details/movie-cast'
 import MovieCollections from '@/components/movie-details/movie-collections'
@@ -42,7 +42,7 @@ export default function MovieDetailsScreeen() {
   ) : (
     <GestureHandlerRootView>
       <BottomSheetModalProvider>
-        <View>
+        <View style={styles.root}>
           <MovieDetailsTopbar
             saved={movie.saved}
             title={movie.title}
@@ -89,15 +89,18 @@ export default function MovieDetailsScreeen() {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
+  root: {
+    backgroundColor: theme.colors.background,
+  },
   container: {
-    paddingTop: 16,
-    gap: 16,
-    paddingBottom: 48,
-    backgroundColor: 'black',
+    paddingTop: theme.space(4),
+    gap: theme.space(2),
+    paddingBottom: theme.space(12),
+    backgroundColor: theme.colors.background,
   },
   detailWrapper: {
-    gap: 8,
-    paddingHorizontal: 16,
+    gap: theme.space(2),
+    paddingHorizontal: theme.space(4),
   },
-})
+}))

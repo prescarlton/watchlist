@@ -21,9 +21,9 @@ export const Text = React.forwardRef<
 
 Text.displayName = 'Text'
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   base: {
-    color: '#fff',
+    color: theme.colors.text,
   },
   xs: {
     fontSize: 12,
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   bold: {
     fontWeight: 'bold',
   },
-})
+}))

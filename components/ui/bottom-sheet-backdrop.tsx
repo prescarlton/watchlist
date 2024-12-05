@@ -1,6 +1,6 @@
 import { BottomSheetBackdropProps } from '@gorhom/bottom-sheet'
 import { BlurView } from 'expo-blur'
-import { Pressable } from 'react-native'
+import { Pressable } from 'react-native-gesture-handler'
 import Animated, {
   Extrapolation,
   interpolate,
@@ -11,11 +11,7 @@ interface BackdropProps extends BottomSheetBackdropProps {
   onPress: () => void
 }
 
-const BottomSheetBackdrop = ({
-  animatedIndex,
-  style,
-  onPress,
-}: BackdropProps) => {
+const BottomSheetBackdrop = ({ animatedIndex, onPress }: BackdropProps) => {
   const AnimatedBlurView = Animated.createAnimatedComponent(BlurView)
   // animated variables
   const containerAnimatedStyle = useAnimatedStyle(() => ({
@@ -28,9 +24,11 @@ const BottomSheetBackdrop = ({
   }))
 
   const intensity = 40
-
   return (
-    <Pressable onPress={onPress} style={[style, { flex: 1, zIndex: 11 }]}>
+    <Pressable
+      onPress={onPress}
+      style={{ position: 'absolute', inset: 0, zIndex: 9998 }}
+    >
       <Animated.View style={[{ flex: 1 }, containerAnimatedStyle]}>
         <AnimatedBlurView
           // {...animatedProps}

@@ -16,7 +16,12 @@ export const Button = ({ variant = 'solid', ...props }: ButtonProps) => {
       <>
         {props.leftIcon}
         {typeof props.children === 'string' ? (
-          <Text style={[styles.baseText, styles[variant + 'Text']]}>
+          <Text
+            style={{
+              ...styles.baseText,
+              ...(variant === 'link' ? styles.linkText : {}),
+            }}
+          >
             {props.children}
           </Text>
         ) : (
@@ -28,16 +33,16 @@ export const Button = ({ variant = 'solid', ...props }: ButtonProps) => {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   base: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingHorizontal: 14,
-    gap: 8,
-    height: 40,
+    backgroundColor: theme.colors.background,
+    borderRadius: theme.space(2),
+    paddingHorizontal: theme.space(4),
+    gap: theme.space(2),
+    height: theme.space(12),
   },
   baseText: {
     fontWeight: 'semibold',
@@ -50,10 +55,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   icon: {
-    borderRadius: 8,
-    width: 40,
-    height: 40,
+    borderRadius: theme.radius.lg,
+    width: theme.space(12),
+    height: theme.space(12),
     paddingHorizontal: 0,
     backgroundColor: '#00000050',
   },
-})
+}))

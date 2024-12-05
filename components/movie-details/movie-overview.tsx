@@ -14,9 +14,14 @@ export default function MovieOverview({ overview }: { overview: string }) {
   return (
     <View style={styles.container}>
       <Pressable onPress={() => setShowMore(true)}>
-        <Text>
+        <Text style={{ color: 'white' }}>
           {truncatedOverview}
-          {overview.length > NUM_CHARS && <Text bold> MORE</Text>}
+          {overview.length > NUM_CHARS && (
+            <Text bold style={{ color: 'white' }}>
+              {' '}
+              MORE
+            </Text>
+          )}
         </Text>
       </Pressable>
       <Modal
@@ -46,7 +51,7 @@ export default function MovieOverview({ overview }: { overview: string }) {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   container: {
     gap: 7,
     marginTop: 7,
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 14,
     gap: 14,
-    backgroundColor: '#1c1c1c',
+    backgroundColor: theme.colors.background,
   },
   modalHeader: {
     width: '100%',
@@ -70,4 +75,4 @@ const styles = StyleSheet.create({
   overview: {
     paddingHorizontal: 14,
   },
-})
+}))

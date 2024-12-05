@@ -1,14 +1,19 @@
 import 'react-native-reanimated'
 
 import FontAwesome from '@expo/vector-icons/FontAwesome'
-import { DarkTheme, ThemeProvider } from '@react-navigation/native'
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator'
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
-import { View } from 'react-native'
+import { useColorScheme, View } from 'react-native'
+import { UnistylesRuntime } from 'react-native-unistyles'
 
 import { Text } from '@/components/ui/text'
 import { db } from '@/db'
@@ -31,7 +36,7 @@ const queryClient = new QueryClient()
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    // SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   })
 
@@ -55,6 +60,7 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const { success, error } = useMigrations(db, migrations)
+  const scheme = useColorScheme()
   if (error) {
     return (
       <View style={{ flex: 1, marginTop: 128 }}>
@@ -72,7 +78,7 @@ function RootLayoutNav() {
   }
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider value={DarkTheme}>
+      <ThemeProvider value={scheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack
           screenOptions={{
             headerShown: false,

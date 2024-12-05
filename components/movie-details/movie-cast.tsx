@@ -1,8 +1,10 @@
 import { Image, View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { StyleSheet } from 'react-native-unistyles'
+
 import { useMovieCast } from '@/domains/movie/queries'
 
+import Card from '../ui/card'
 import { Text } from '../ui/text'
 
 export default function MovieCast({ movieId }: { movieId: number }) {
@@ -20,13 +22,13 @@ export default function MovieCast({ movieId }: { movieId: number }) {
         <View style={styles.listWrapper}>
           {data?.map((cast) => (
             <View key={cast.id} style={styles.castWrapper}>
-              <View style={styles.castPhotoWrapper}>
+              <Card style={styles.castPhotoWrapper}>
                 <Image
                   source={{ uri: cast.profile_path }}
                   alt={cast.name}
                   style={styles.castPhoto}
                 />
-              </View>
+              </Card>
               <Text size="sm" style={styles.castName} numberOfLines={2}>
                 {cast.name}
               </Text>
@@ -41,30 +43,28 @@ export default function MovieCast({ movieId }: { movieId: number }) {
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   container: {
-    gap: 7,
+    gap: theme.space(2),
   },
   header: {
-    marginLeft: 16,
+    marginLeft: theme.space(4),
   },
   scrollView: {
-    paddingStart: 16,
+    paddingStart: theme.space(4),
   },
   listWrapper: {
     flexDirection: 'row',
-    gap: 14,
+    gap: theme.space(4),
   },
   castWrapper: {
     alignItems: 'center',
-    gap: 3,
-    width: 84,
+    gap: theme.space(1),
+    width: theme.space(24),
   },
   castPhotoWrapper: {
-    width: 84,
-    height: 84,
-    backgroundColor: '#ffffff15',
-    borderRadius: 10,
+    width: theme.space(24),
+    height: theme.space(24),
     overflow: 'hidden',
   },
   castPhoto: {
@@ -79,4 +79,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     opacity: 0.8,
   },
-})
+}))

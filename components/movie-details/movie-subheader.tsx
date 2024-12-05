@@ -13,11 +13,17 @@ export default function MovieSubheader({ movie }: { movie: MovieDetails }) {
     <View style={styles.container}>
       <MovieRating rating={movie.vote_average} />
       <Divider orientation="vertical" style={{ height: '75%' }} />
-      <Text size="sm">{movie.year}</Text>
+      <Text size="sm" style={{ color: 'white' }}>
+        {movie.year}
+      </Text>
       <Divider orientation="vertical" style={{ height: '75%' }} />
-      <Text size="sm">{movie.genres[0].name}</Text>
+      <Text size="sm" style={{ color: 'white' }}>
+        {movie.genres[0].name}
+      </Text>
       <Divider orientation="vertical" style={{ height: '75%' }} />
-      <Text size="sm">{formatRuntime(movie.runtime)}</Text>
+      <Text size="sm" style={{ color: 'white' }}>
+        {formatRuntime(movie.runtime)}
+      </Text>
     </View>
   )
 }

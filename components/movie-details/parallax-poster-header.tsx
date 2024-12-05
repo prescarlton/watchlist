@@ -1,13 +1,12 @@
 import { FontAwesome } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { ImageStyle, ViewStyle } from 'react-native'
-import { StyleSheet } from 'react-native-unistyles'
-
 import Animated, {
   interpolate,
   SharedValue,
   useAnimatedStyle,
 } from 'react-native-reanimated'
+import { StyleSheet } from 'react-native-unistyles'
 
 import { Button } from '@/components/ui/button'
 import { Text } from '@/components/ui/text'
@@ -118,20 +117,22 @@ export default function ParallaxPosterHeader({
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create(({ space }) => ({
   container: {
     marginTop: 'auto',
-    gap: 4,
-    padding: 16,
+    gap: space(1),
+    padding: space(4),
     zIndex: 10,
   },
   movieTitle: {
     fontSize: 30,
     lineHeight: 36,
     fontWeight: 'bold',
+    color: 'white',
   },
   button: {
     width: '75%',
-    marginVertical: 8,
+    marginVertical: space(2),
+    backgroundColor: 'white',
   },
-})
+}))

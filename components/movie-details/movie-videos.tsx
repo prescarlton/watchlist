@@ -1,9 +1,10 @@
 import { View } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import { StyleSheet } from 'react-native-unistyles'
 
-import { ScrollView } from 'react-native-gesture-handler'
-
 import { Text } from '@/components/ui/text'
+
+import Card from '../ui/card'
 
 export default function MovieVideos({ movieId }: { movieId: number }) {
   return (
@@ -17,35 +18,34 @@ export default function MovieVideos({ movieId }: { movieId: number }) {
         style={styles.scrollView}
       >
         <View style={styles.videoList}>
-          <View style={styles.videoCard}>
+          <Card style={styles.videoCard}>
             <Text bold>No videos found</Text>
-          </View>
+          </Card>
         </View>
       </ScrollView>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create(({ space }) => ({
   container: {
-    gap: 8,
+    gap: space(2),
   },
   header: {
-    marginLeft: 16,
+    marginLeft: space(4),
   },
   scrollView: {
-    paddingStart: 16,
+    paddingStart: space(4),
+    paddingVertical: space(1),
   },
   videoList: {
     flexDirection: 'row',
-    gap: 16,
+    gap: space(4),
   },
   videoCard: {
-    width: 236,
-    height: 124,
-    backgroundColor: '#ffffff15',
-    borderRadius: 12,
+    width: space(60),
+    height: space(32),
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+}))

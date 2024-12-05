@@ -1,8 +1,10 @@
 import { Link } from 'expo-router'
 import { Image, View } from 'react-native'
 import { StyleSheet } from 'react-native-unistyles'
+
 import { Movie } from '@/domains/movie/movie.model'
 
+import Card from '../ui/card'
 import { Text } from '../ui/text'
 
 export default function MoviePosterCard({ movie }: { movie: Movie }) {
@@ -14,7 +16,7 @@ export default function MoviePosterCard({ movie }: { movie: Movie }) {
         params: { id: movie.movieId },
       }}
     >
-      <View key={movie.id} style={styles.imageWrapper}>
+      <Card key={movie.id} style={styles.imageWrapper}>
         <View style={styles.imageFallback}>
           <Text bold>{movie.title}</Text>
           <Text>{movie.year}</Text>
@@ -24,28 +26,26 @@ export default function MoviePosterCard({ movie }: { movie: Movie }) {
           alt={movie.title}
           style={styles.image}
         />
-      </View>
+      </Card>
     </Link>
   )
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   imageWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 114,
-    height: 168,
-    backgroundColor: '#ffffff15',
-    borderRadius: 10,
+    width: theme.space(32),
+    height: theme.space(48),
   },
   image: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    borderRadius: 10,
+    borderRadius: theme.radius.lg,
   },
   imageFallback: {
     position: 'absolute',
     textAlign: 'center',
   },
-})
+}))

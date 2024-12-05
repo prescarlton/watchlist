@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { View } from 'react-native'
 import { StyleSheet } from 'react-native-unistyles'
+
 import GridView from '@/components/list/grid-view'
 import ListView from '@/components/list/list-view'
 import Page from '@/components/page'
@@ -34,12 +35,12 @@ export default function Screen() {
     </Page>
   )
 }
-const styles = StyleSheet.create({
+const styles = StyleSheet.create(({ space }) => ({
   container: {
-    gap: 14,
+    gap: space(4),
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-})
+}))

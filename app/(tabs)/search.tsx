@@ -2,6 +2,7 @@ import { debounce } from 'lodash'
 import { useState } from 'react'
 import { ScrollView, TextInput, View } from 'react-native'
 import { StyleSheet } from 'react-native-unistyles'
+
 import MoviePosterCard from '@/components/common/movie-poster-card'
 import Page from '@/components/page'
 import { useSearchMovies } from '@/domains/movie/queries'
@@ -21,8 +22,13 @@ export default function Screen() {
         defaultValue={query}
         onChangeText={onSearchChange}
         style={styles.searchBox}
+        // autoFocus
+        autoCorrect={false}
       />
-      <ScrollView contentContainerStyle={{ paddingBottom: 64, paddingTop: 14 }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 64, paddingTop: 14 }}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.searchResults}>
           {data?.map((movie) => (
             <MoviePosterCard key={movie.id} movie={movie} />
@@ -32,17 +38,17 @@ export default function Screen() {
     </Page>
   )
 }
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   searchBox: {
-    backgroundColor: '#ffffff30',
-    height: 40,
-    color: '#fff',
-    borderRadius: 10,
-    paddingHorizontal: 14,
+    backgroundColor: theme.colors.card,
+    height: theme.space(10),
+    color: theme.colors.text,
+    borderRadius: theme.radius.lg,
+    paddingHorizontal: theme.space(4),
   },
   searchResults: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 7,
+    gap: theme.space(2),
   },
-})
+}))
