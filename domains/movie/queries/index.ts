@@ -1,6 +1,7 @@
 export * from './use-get-popular-movies'
 export * from './use-movie-cast'
 export * from './use-movie-details'
+export * from './use-movie-videos'
 export * from './use-save-movie'
 export * from './use-saved-movies'
 export * from './use-search-movies'

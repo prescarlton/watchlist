@@ -6,3 +6,6 @@ export const formatRuntime = (runtime: number) => {
   const minutes = runtime % 60
   return `${hours}h ${minutes}m`
 }
+export const getYoutubeUrl = (key: string) => {
+  return `https://www.youtube.com/watch?v=${key}`
+}

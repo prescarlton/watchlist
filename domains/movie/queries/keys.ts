@@ -12,6 +12,7 @@ function createMovieKeys() {
     watchProviders: (id: number) => [...all, 'watchProviders', id],
     playingNow: [...all, 'playingNow'],
     similar: (id: number) => [...all, 'similar', id],
+    videos: (id: number) => [...all, 'videos', id],
   }
 }
 export const movieKeys = createMovieKeys()

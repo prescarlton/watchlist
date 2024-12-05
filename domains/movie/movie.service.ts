@@ -1,5 +1,5 @@
 import axios from 'axios'
-import _, { groupBy } from 'lodash'
+import _ from 'lodash'
 
 import { getFullImageUrl } from '@/util'
 
@@ -8,6 +8,7 @@ import {
   GetWatchProvidersApiResponse,
   Movie,
   MovieDetails,
+  MovieVideo,
   WatchProvider,
 } from './movie.model'
 import { MovieRepository } from './movie.repository'
@@ -149,8 +150,16 @@ export const createMovieService = ({
         }))
         .value()
     },
-    async getMovieVideos(movieId: number) {
-      return api.get(`/movie/${movieId}/videos`).then((res) => res.data.results)
+    async getMovieVideos(movieId: number): Promise<MovieVideo[]> {
+      const data = await api
+        .get(`/movie/${movieId}/videos`)
+        .then((res) => res.data.results)
+      return data.filter(
+        (video: MovieVideo) =>
+          video.site === 'YouTube' &&
+          video.official === true &&
+          video.type === 'Trailer',
+      )
     },
     async getSimilarMovies(movieId: number): Promise<Movie[]> {
       const res = await api
