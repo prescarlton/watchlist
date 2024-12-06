@@ -19,7 +19,11 @@ export const Button = ({ variant = 'solid', ...props }: ButtonProps) => {
           <Text
             style={{
               ...styles.baseText,
-              ...(variant === 'link' ? styles.linkText : {}),
+              ...(variant === 'link'
+                ? styles.linkText
+                : variant === 'outline'
+                  ? styles.outlineText
+                  : {}),
             }}
           >
             {props.children}
@@ -62,5 +66,27 @@ const styles = StyleSheet.create((theme) => ({
     alignItems: 'center',
     paddingHorizontal: 0,
     backgroundColor: '#00000050',
+  },
+  outline: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: theme.colors.background,
+    borderRadius: theme.space(2),
+    paddingHorizontal: theme.space(4),
+    gap: theme.space(2),
+    height: theme.space(12),
+  },
+  ghost: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: theme.space(2),
+    paddingHorizontal: theme.space(4),
+    gap: theme.space(2),
+  },
+  outlineText: {
+    color: theme.colors.background,
   },
 }))

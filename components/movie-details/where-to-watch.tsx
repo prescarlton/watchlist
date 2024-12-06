@@ -6,6 +6,8 @@ import { Text } from '@/components/ui/text'
 import { useWatchProviders } from '@/domains/movie/queries'
 import { getFullImageUrl } from '@/util'
 
+import Card from '../ui/card'
+
 export default function WhereToWatch({ movieId }: { movieId: number }) {
   const { data: providers } = useWatchProviders(movieId)
   return providers?.length ? (
@@ -29,7 +31,7 @@ export default function WhereToWatch({ movieId }: { movieId: number }) {
           directionalLockEnabled
           alwaysBounceVertical={false}
           renderItem={({ item, index }) => (
-            <View key={index} style={styles.watchProvider}>
+            <Card key={index} style={styles.watchProvider}>
               <Image
                 source={{ uri: getFullImageUrl(item.logo_path) }}
                 alt={item.provider_name}
@@ -39,49 +41,45 @@ export default function WhereToWatch({ movieId }: { movieId: number }) {
                 <Text size="sm" bold>
                   {item.watchtype}
                 </Text>
-                <Text size="xs">{item.provider_name}</Text>
+                <Text size="xs" numberOfLines={2}>
+                  {item.provider_name}
+                </Text>
               </View>
-            </View>
+            </Card>
           )}
         />
       </ScrollView>
     </View>
-  ) : (
-    <Text size="lg" style={{ marginLeft: 16 }} bold>
-      In Theaters Now
-    </Text>
-  )
+  ) : null
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   container: {
-    gap: 7,
+    gap: theme.space(2),
   },
   header: {
-    marginLeft: 16,
+    marginLeft: theme.space(4),
   },
   scrollView: {
-    paddingStart: 16,
+    paddingHorizontal: theme.space(4),
   },
   watchProvider: {
     flexDirection: 'row',
-    height: 56,
-    width: 196,
-    gap: 8,
-    backgroundColor: '#ffffff15',
-    borderRadius: 8,
-    padding: 8,
-    marginVertical: 4,
-    marginRight: 8,
+    width: theme.space(60),
+    height: theme.space(16),
+    gap: theme.space(2),
+    padding: theme.space(2),
+    marginVertical: theme.space(1),
+    marginRight: theme.space(2),
   },
   watchProviderLogo: {
-    width: 42,
-    height: 42,
+    width: theme.space(12),
+    height: theme.space(12),
     objectFit: 'cover',
-    borderRadius: 10,
+    borderRadius: theme.radius.lg,
   },
   watchProviderName: {
     flex: 1,
     justifyContent: 'center',
   },
-})
+}))

@@ -51,11 +51,12 @@ const styles = StyleSheet.create((theme) => ({
     marginLeft: theme.space(4),
   },
   scrollView: {
-    paddingStart: theme.space(4),
+    // paddingHorizontal: theme.space(4),
   },
   listWrapper: {
     flexDirection: 'row',
     gap: theme.space(4),
+    paddingHorizontal: theme.space(4),
   },
   castWrapper: {
     alignItems: 'center',

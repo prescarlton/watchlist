@@ -12,15 +12,15 @@ export const Divider = ({ orientation, ...props }: DividerProps) => {
   return <View {...props} style={[style, props.style]} />
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme) => ({
   vertical: {
     width: 1,
     height: '100%',
-    backgroundColor: '#ffffff40',
+    backgroundColor: theme.colors.card,
   },
   horizontal: {
     height: 1,
     width: '100%',
-    backgroundColor: '#ffffff40',
+    backgroundColor: '#00000020',
   },
-})
+}))

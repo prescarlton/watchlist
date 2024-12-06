@@ -15,7 +15,7 @@ export default function MovieVideos({ movieId }: { movieId: number }) {
   return (
     <View style={styles.container}>
       <Text style={styles.header} size="lg" bold>
-        Videos
+        Trailers
       </Text>
       <ScrollView
         horizontal
@@ -23,6 +23,7 @@ export default function MovieVideos({ movieId }: { movieId: number }) {
         style={styles.scrollView}
       >
         <View style={styles.videoList}>
+          {data?.length === 0 && <Text size="sm">No trailers found</Text>}
           {data?.map((video) => (
             <Link href={getYoutubeUrl(video.key)} key={video.id}>
               <Card style={styles.videoCard}>

@@ -13,6 +13,7 @@ import { Text } from '@/components/ui/text'
 import { MovieDetails } from '@/domains/movie/movie.model'
 import { getFullImageUrl } from '@/util'
 
+import MovieActions from './movie-actions'
 import MovieOverview from './movie-overview'
 import MovieSubheader from './movie-subheader'
 
@@ -104,13 +105,7 @@ export default function ParallaxPosterHeader({
           <Text style={styles.movieTitle}>{movie.title}</Text>
           <MovieSubheader movie={movie} />
           <MovieOverview overview={movie.overview} />
-          <Button
-            onPress={showModal}
-            style={styles.button}
-            leftIcon={<FontAwesome name="bookmark-o" size={16} />}
-          >
-            Add to List
-          </Button>
+          <MovieActions movie={movie} />
         </Animated.View>
       </Animated.View>
     </>

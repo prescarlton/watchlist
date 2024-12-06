@@ -1,8 +1,3 @@
-import { Link } from 'expo-router'
-import { Image, View } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import { StyleSheet } from 'react-native-unistyles'
-
 import { useTopRatedMovies } from '@/domains/movie/queries'
 
 import MovieList from '../common/movie-list'

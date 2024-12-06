@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons'
+import { Feather, Ionicons } from '@expo/vector-icons'
 import { BlurView } from 'expo-blur'
 import { router } from 'expo-router'
 import { TextStyle, View, ViewStyle } from 'react-native'
@@ -63,18 +63,16 @@ export default function MovieDetailsTopbar({
       </Button>
       <Animated.Text
         style={[
-          { color: 'white', fontSize: 20, fontWeight: 'bold' },
+          { color: 'white', fontSize: 20, fontWeight: 'bold', maxWidth: '70%' },
           titleStyle,
         ]}
+        adjustsFontSizeToFit
+        numberOfLines={1}
       >
         {title}
       </Animated.Text>
       <Button onPress={onPressBookmark} variant="icon">
-        <Ionicons
-          name={saved ? 'bookmark' : 'bookmark-outline'}
-          size={20}
-          color="white"
-        />
+        <Feather name="more-horizontal" size={20} color="white" />
       </Button>
     </View>
   )

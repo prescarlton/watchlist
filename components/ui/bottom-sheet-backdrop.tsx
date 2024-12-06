@@ -25,10 +25,7 @@ const BottomSheetBackdrop = ({ animatedIndex, onPress }: BackdropProps) => {
 
   const intensity = 40
   return (
-    <Pressable
-      onPress={onPress}
-      style={{ position: 'absolute', inset: 0, zIndex: 9998 }}
-    >
+    <Pressable onPress={onPress} style={{ position: 'absolute', inset: 0 }}>
       <Animated.View style={[{ flex: 1 }, containerAnimatedStyle]}>
         <AnimatedBlurView
           // {...animatedProps}

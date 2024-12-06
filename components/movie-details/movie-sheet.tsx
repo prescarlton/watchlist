@@ -7,11 +7,13 @@ import { StyleSheet } from 'react-native-unistyles'
 
 import BottomSheetBackdrop from '@/components/ui/bottom-sheet-backdrop'
 import { Button } from '@/components/ui/button'
-import { Text } from '@/components/ui/text'
 import { MovieDetails } from '@/domains/movie/movie.model'
 import { useSaveMovie } from '@/domains/movie/queries'
 import { movieKeys } from '@/domains/movie/queries/keys'
 import { useUnsaveMovie } from '@/domains/movie/queries/use-unsave-movie'
+
+import { Divider } from '../ui/divider'
+import { Text } from '../ui/text'
 
 interface MovieSheetProps {
   movie: MovieDetails
@@ -51,23 +53,8 @@ const MovieSheet = forwardRef<Ref, MovieSheetProps>(function MovieSheet(
   return (
     <BottomSheetModal
       ref={ref}
-      detached
-      enableContentPanningGesture={false}
-      enableHandlePanningGesture={false}
-      enableOverDrag={false}
-      enablePanDownToClose={false}
-      bottomInset={bottom}
-      handleStyle={{
-        display: 'none',
-      }}
-      containerStyle={{ marginHorizontal: 16 }}
-      backgroundStyle={{
-        backgroundColor: 'transparent',
-      }}
-      style={{
-        marginHorizontal: 16,
-        zIndex: 9999,
-      }}
+      handleStyle={styles.handle}
+      style={{ paddingBottom: bottom }}
       backdropComponent={(props) => (
         <BottomSheetBackdrop
           {...props}
@@ -76,37 +63,56 @@ const MovieSheet = forwardRef<Ref, MovieSheetProps>(function MovieSheet(
         />
       )}
     >
-      <BottomSheetView style={styles.container}>
-        <Text size="xl" bold style={styles.movieTitle}>
+      <BottomSheetView style={styles.sheetView}>
+        <Text style={styles.movieTitle} bold>
           {movie.title}
         </Text>
         <Button
           onPress={toggleSaveMovie}
           leftIcon={<Feather name={movie.saved ? 'minus' : 'plus'} size={24} />}
+          variant="ghost"
+          style={styles.action}
         >
           {movie.saved ? 'Remove from list' : 'Add to list'}
         </Button>
-        <Button leftIcon={<Feather name="eye" size={32} />}>Watch</Button>
+        <Divider />
         <Button
-          // @ts-expect-error: TS doesn't understand this ref type here
-          onPress={() => ref.current?.dismiss()}
+          variant="ghost"
+          style={styles.action}
+          leftIcon={<Feather name="check" size={24} />}
         >
-          Done
+          Mark as watched
         </Button>
       </BottomSheetView>
     </BottomSheetModal>
   )
 })
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'transparent',
-    gap: 14,
+const styles = StyleSheet.create((theme) => ({
+  handle: {
+    backgroundColor: theme.colors.card,
+    borderTopLeftRadius: theme.radius.xl,
+    borderTopRightRadius: theme.radius.xl,
+  },
+  sheetView: {
+    gap: theme.space(4),
+    zIndex: 9999,
+    backgroundColor: theme.colors.card,
+    padding: theme.space(4),
+    paddingTop: 0,
+    paddingBottom: theme.space(16),
     justifyContent: 'flex-end',
+    borderBottomLeftRadius: theme.radius.lg,
+    borderBottomRightRadius: theme.radius.lg,
   },
   movieTitle: {
     textAlign: 'center',
+    marginBottom: theme.space(2),
+    marginVertical: theme.space(1),
   },
-})
+  action: {
+    justifyContent: 'flex-start',
+  },
+}))
 
 export default MovieSheet

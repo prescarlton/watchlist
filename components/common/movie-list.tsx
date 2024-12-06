@@ -16,10 +16,14 @@ interface MovieListProps {
 export default function MovieList({ title, movies }: MovieListProps) {
   return (
     <View style={styles.container}>
-      <Text size="lg" bold>
+      <Text size="lg" bold style={styles.header}>
         {title}
       </Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.scrollView}
+      >
         <View style={styles.movieList}>
           {movies.map((movie) => (
             <View style={styles.movieWrapper} key={movie.movieId}>
@@ -48,10 +52,16 @@ export default function MovieList({ title, movies }: MovieListProps) {
 }
 
 const styles = StyleSheet.create((theme) => ({
+  scrollView: {
+    paddingStart: theme.space(2),
+    marginVertical: theme.space(2),
+  },
+  header: {
+    marginLeft: theme.space(2),
+  },
   container: {
-    marginTop: theme.space(4),
     gap: theme.space(2),
-    padding: theme.space(4),
+    paddingVertical: theme.space(4),
   },
   movieList: {
     flexDirection: 'row',
@@ -59,6 +69,7 @@ const styles = StyleSheet.create((theme) => ({
   },
   movieWrapper: {
     gap: theme.space(2),
+    width: theme.space(42),
   },
   movieCard: {
     flexDirection: 'row',
