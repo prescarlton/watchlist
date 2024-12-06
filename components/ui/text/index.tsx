@@ -6,20 +6,14 @@ interface TextProps extends RNTextProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   bold?: boolean
 }
-export const Text = React.forwardRef<
-  React.ElementRef<typeof RNText>,
-  TextProps
->(({ size = 'md', bold = false, ...props }, ref) => {
+export function Text({ size = 'md', bold = false, ...props }: TextProps) {
   return (
     <RNText
       {...props}
       style={[styles.base, styles[size], props.style, bold && styles.bold]}
-      ref={ref}
     />
   )
-})
-
-Text.displayName = 'Text'
+}
 
 const styles = StyleSheet.create((theme) => ({
   base: {

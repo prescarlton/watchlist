@@ -12,7 +12,7 @@ interface ButtonProps extends PressableProps {
 
 export const Button = ({ variant = 'solid', ...props }: ButtonProps) => {
   return (
-    <Pressable {...props} style={[styles.base, styles[variant], props.style]}>
+    <Pressable {...props} style={[styles[variant], props.style]}>
       <>
         {props.leftIcon}
         {typeof props.children === 'string' ? (
@@ -34,7 +34,7 @@ export const Button = ({ variant = 'solid', ...props }: ButtonProps) => {
 }
 
 const styles = StyleSheet.create((theme) => ({
-  base: {
+  solid: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -58,6 +58,8 @@ const styles = StyleSheet.create((theme) => ({
     borderRadius: theme.radius.lg,
     width: theme.space(12),
     height: theme.space(12),
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingHorizontal: 0,
     backgroundColor: '#00000050',
   },

@@ -182,5 +182,30 @@ export const createMovieService = ({
         year: movie.release_date.split('-')[0],
       }))
     },
+    async getTopRatedMovies(): Promise<Movie[]> {
+      const movies = await api.get('/movie/top_rated').then((res) => res.data)
+      return movies.results.map((movie) => ({
+        id: movie.id,
+        movieId: movie.id,
+        title: movie.title,
+        backdrop: movie.backdrop_path,
+        poster: getFullImageUrl(movie.poster_path),
+        year: movie.release_date.split('-')[0],
+        vote_average: movie.vote_average,
+      }))
+    },
+    async getTrendingMovies(): Promise<Movie[]> {
+      const movies = await api
+        .get('/trending/movie/day')
+        .then((res) => res.data)
+      return movies.results.map((movie) => ({
+        id: movie.id,
+        movieId: movie.id,
+        title: movie.title,
+        backdrop: movie.backdrop_path,
+        poster: getFullImageUrl(movie.poster_path),
+        year: movie.release_date.split('-')[0],
+      }))
+    },
   }
 }
